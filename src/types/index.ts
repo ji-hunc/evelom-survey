@@ -18,7 +18,7 @@ export interface QuizQuestion {
   question: string;
   type: 'yesno' | 'scale' | 'choice';
   options?: string[];
-  category: 'skinType' | 'concerns' | 'lifestyle' | 'preferences';
+  category: 'skinType' | 'concerns' | 'lifestyle' | 'preferences' | 'environmental';
 }
 
 export interface QuizAnswer {

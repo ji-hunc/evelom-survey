@@ -145,7 +145,7 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen gradient-bg py-4 sm:py-8">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6">
+      <div className="quiz-container max-w-2xl mx-auto px-4 sm:px-6">
         <Link
           href="/"
           className="inline-flex items-center text-[#4a7c59] hover:text-[#3d6549] mb-8"
@@ -154,7 +154,7 @@ export default function QuizPage() {
         </Link>
 
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className="progress-container mb-8">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm text-gray-600">진행상황</span>
             <span className="text-sm text-gray-600">
@@ -170,23 +170,23 @@ export default function QuizPage() {
         </div>
 
         {/* Question Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
-          <h2 className="text-lg sm:text-xl font-medium text-gray-800 mb-6 sm:mb-8">
+        <div className="quiz-question-card bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
+          <h2 className="quiz-question-title text-lg sm:text-xl font-medium text-gray-800 mb-6 sm:mb-8">
             {currentQuestion.question}
           </h2>
 
-          <div className="space-y-3">
+          <div className="quiz-options space-y-3">
             {currentQuestion.type === "yesno" && (
               <>
                 <button
                   onClick={() => handleAnswer(true)}
-                  className="w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   예
                 </button>
                 <button
                   onClick={() => handleAnswer(false)}
-                  className="w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   아니오
                 </button>
@@ -203,7 +203,7 @@ export default function QuizPage() {
                       currentQuestion.type === "scale" ? index : option
                     )
                   }
-                  className="w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   {option}
                 </button>
@@ -212,7 +212,7 @@ export default function QuizPage() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center">
+        <div className="navigation-container flex justify-between items-center">
           <button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}

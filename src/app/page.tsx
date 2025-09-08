@@ -1,10 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
-  const [showQuiz, setShowQuiz] = useState(false);
 
   return (
     <div className="min-h-screen gradient-bg">
@@ -20,19 +18,19 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="main-hero py-12 sm:py-20 px-4 sm:px-6">
+        <div className="main-container max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 text-gray-800 leading-tight">
             당신만을 위한
             <span className="gradient-text font-medium"> 클렌저</span>를 찾아보세요
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-4">
-            8개의 간단한 설문을 통해 4가지 프리미엄 클렌저 중에서 
+            8개의 전문 설문을 통해 4가지 프리미엄 클렌저 중에서 
             당신의 피부에 가장 완벽하게 맞는 제품을 추천해드립니다.
           </p>
           <Link 
             href="/survey"
-            className="inline-block bg-[#4a7c59] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:bg-[#3d6549] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="main-cta-button inline-block bg-[#4a7c59] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:bg-[#3d6549] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             설문 시작하기
           </Link>
@@ -90,7 +88,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-12 sm:py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="main-container max-w-4xl mx-auto text-center">
           <h3 className="text-2xl sm:text-3xl font-light mb-4 sm:mb-6 text-gray-800">
             피부 타입에 맞는 완벽한 클렌저를 만나보세요
           </h3>
@@ -100,7 +98,7 @@ export default function Home() {
           </p>
           <Link 
             href="/survey"
-            className="inline-block bg-gradient-to-r from-[#4a7c59] to-[#7db46c] text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            className="main-cta-button inline-block bg-gradient-to-r from-[#4a7c59] to-[#7db46c] text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
             지금 시작하기
           </Link>
