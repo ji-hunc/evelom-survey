@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
   --background: #fefefe;
@@ -15,13 +15,13 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: "Inter", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.6;
 }
 
@@ -66,20 +66,20 @@ body {
     max-width: 80%;
     margin: 0 auto;
   }
-  
+
   .quiz-question-card {
     min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  
+
   .quiz-question-title {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 2rem;
   }
-  
+
   .quiz-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -87,7 +87,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
   }
-  
+
   .quiz-option-button {
     min-height: 120px !important;
     height: 120px !important;
@@ -103,104 +103,100 @@ body {
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
-  
+
   .progress-container {
     max-width: 80%;
     margin: 0 auto 2rem auto;
   }
-  
+
   .navigation-container {
     max-width: 80%;
     margin: 2rem auto 0 auto;
   }
-  
+
   /* iPad 1366x1024 Result page optimization */
   .result-container {
-    max-width: 90% !important;
     margin: 0 auto;
-    padding: 0 2rem !important;
   }
-  
+
   /* Main result card optimization for iPad landscape */
   .result-main-card {
     height: auto !important;
-    min-height: 450px !important;
     margin-bottom: 2rem !important;
   }
-  
+
   .result-main-card .grid {
-    min-height: 450px !important;
     height: auto !important;
   }
-  
+
   /* Typography scaling for iPad 1366x1024 */
   .result-main-card h2 {
     font-size: 1.75rem !important;
     line-height: 1.2 !important;
     margin-bottom: 0.5rem !important;
   }
-  
+
   .result-main-card h3 {
     font-size: 1.25rem !important;
     margin-bottom: 1rem !important;
   }
-  
+
   .result-main-card p,
   .result-main-card span {
     font-size: 1rem !important;
     line-height: 1.4 !important;
   }
-  
+
   .result-main-card button {
     font-size: 1.1rem !important;
     padding: 1rem 2rem !important;
   }
-  
+
   /* Other products grid for iPad 1366x1024 */
   .other-products-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 1.5rem !important;
     margin-top: 1rem !important;
   }
-  
+
   .other-product-card {
     height: auto !important;
   }
-  
+
   .other-product-card .product-image {
     height: 180px !important;
   }
-  
+
   .other-product-card h3 {
     font-size: 1.25rem !important;
     margin-bottom: 0.75rem !important;
   }
-  
+
   .other-product-card p {
     font-size: 0.95rem !important;
     line-height: 1.4 !important;
   }
-  
+
   .other-products-title {
     font-size: 1.5rem !important;
     margin-bottom: 1.5rem !important;
   }
-  
+
   /* Main page optimization */
   .main-container {
     max-width: 80%;
     margin: 0 auto;
   }
-  
+
   .main-hero {
     padding: 3rem 0;
   }
-  
+
   .main-hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .main-cta-button {
     font-size: 1.25rem;
     padding: 1rem 2rem;

@@ -65,20 +65,20 @@ export default function QuizPage() {
 
   if (showDiagnosisInput) {
     return (
-      <div className="min-h-screen gradient-bg py-4 sm:py-8">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+      <div className="min-h-screen gradient-bg py-2 sm:py-4">
+        <div className="max-w-6xl mx-auto px-1 sm:px-2 lg:px-4 xl:px-8">
           <Link
             href="/"
-            className="inline-flex items-center text-[#4a7c59] hover:text-[#3d6549] mb-8"
+            className="inline-flex items-center text-lg lg:text-2xl text-[#4a7c59] hover:text-[#3d6549] mb-4 lg:mb-6"
           >
             ← 홈으로 돌아가기
           </Link>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-            <h2 className="text-xl sm:text-2xl font-medium text-gray-800 mb-2">
+          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-800 mb-4 lg:mb-6">
               피부 진단 데이터 (선택사항)
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
               오프라인 매장에서 측정한 피부 진단 수치가 있다면 입력해주세요. 더
               정확한 추천을 받을 수 있습니다.
             </p>
@@ -95,10 +95,10 @@ export default function QuizPage() {
                   key={item.key}
                   className="flex items-center justify-between"
                 >
-                  <label className="text-sm sm:text-base text-gray-700 font-medium w-16 sm:w-20">
+                  <label className="text-base sm:text-lg lg:text-2xl text-gray-700 font-medium w-20 sm:w-24 lg:w-32">
                     {item.label}
                   </label>
-                  <div className="flex items-center space-x-2 sm:space-x-4 flex-1 ml-2 sm:ml-4">
+                  <div className="flex items-center space-x-3 sm:space-x-4 lg:space-x-6 flex-1 ml-3 sm:ml-4 lg:ml-6">
                     <input
                       type="number"
                       min="0"
@@ -112,10 +112,10 @@ export default function QuizPage() {
                           [item.key]: parseInt(e.target.value) || 0,
                         }))
                       }
-                      className="flex-1 px-2 sm:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4a7c59] focus:border-transparent text-sm sm:text-base"
+                      className="flex-1 px-3 sm:px-4 lg:px-6 py-3 lg:py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4a7c59] focus:border-transparent text-base sm:text-lg lg:text-2xl"
                       placeholder="0-100"
                     />
-                    <span className="text-sm sm:text-base text-gray-600 w-6 sm:w-8 text-right">
+                    <span className="text-base sm:text-lg lg:text-2xl text-gray-600 w-8 sm:w-10 lg:w-12 text-right">
                       {item.unit}
                     </span>
                   </div>
@@ -126,13 +126,13 @@ export default function QuizPage() {
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mt-8 sm:mt-12">
               <button
                 onClick={skipDiagnosis}
-                className="flex-1 py-3 text-sm sm:text-base text-gray-600 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
+                className="flex-1 py-4 lg:py-6 text-base sm:text-lg lg:text-2xl text-gray-600 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
               >
                 건너뛰기
               </button>
               <button
                 onClick={handleSubmit}
-                className="flex-1 py-3 text-sm sm:text-base bg-[#4a7c59] text-white rounded-full hover:bg-[#3d6549] transition-colors"
+                className="flex-1 py-4 lg:py-6 text-base sm:text-lg lg:text-2xl bg-[#4a7c59] text-white rounded-full hover:bg-[#3d6549] transition-colors"
               >
                 결과 확인하기
               </button>
@@ -144,20 +144,20 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen gradient-bg py-4 sm:py-8">
-      <div className="quiz-container max-w-2xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen gradient-bg py-2 sm:py-4">
+      <div className="quiz-container max-w-6xl mx-auto px-1 sm:px-2 lg:px-4 xl:px-8">
         <Link
           href="/"
-          className="inline-flex items-center text-[#4a7c59] hover:text-[#3d6549] mb-8"
+          className="inline-flex items-center text-lg lg:text-2xl text-[#4a7c59] hover:text-[#3d6549] mb-4 lg:mb-6"
         >
           ← 홈으로 돌아가기
         </Link>
 
         {/* Progress Bar */}
-        <div className="progress-container mb-8">
+        <div className="progress-container mb-4 lg:mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-600">진행상황</span>
-            <span className="text-sm text-gray-600">
+            <span className="text-base lg:text-xl text-gray-600">진행상황</span>
+            <span className="text-base lg:text-xl text-gray-600">
               {currentQuestionIndex + 1} / {quizQuestions.length}
             </span>
           </div>
@@ -170,23 +170,23 @@ export default function QuizPage() {
         </div>
 
         {/* Question Card */}
-        <div className="quiz-question-card bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
-          <h2 className="quiz-question-title text-lg sm:text-xl font-medium text-gray-800 mb-6 sm:mb-8">
+        <div className="quiz-question-card bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10 mb-6">
+          <h2 className="quiz-question-title text-xl sm:text-2xl lg:text-4xl font-medium text-gray-800 mb-6 sm:mb-8 lg:mb-10">
             {currentQuestion.question}
           </h2>
 
-          <div className="quiz-options space-y-3">
+          <div className="quiz-options space-y-4 lg:space-y-6">
             {currentQuestion.type === "yesno" && (
               <>
                 <button
                   onClick={() => handleAnswer(true)}
-                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-4 sm:p-5 lg:p-8 text-left text-base sm:text-lg lg:text-3xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   예
                 </button>
                 <button
                   onClick={() => handleAnswer(false)}
-                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-4 sm:p-5 lg:p-8 text-left text-base sm:text-lg lg:text-3xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   아니오
                 </button>
@@ -203,7 +203,7 @@ export default function QuizPage() {
                       currentQuestion.type === "scale" ? index : option
                     )
                   }
-                  className="quiz-option-button w-full p-3 sm:p-4 text-left text-sm sm:text-base rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
+                  className="quiz-option-button w-full p-4 sm:p-5 lg:p-8 text-left text-base sm:text-lg lg:text-3xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
                 >
                   {option}
                 </button>
@@ -216,11 +216,11 @@ export default function QuizPage() {
           <button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}
-            className="px-4 sm:px-6 py-2 text-sm sm:text-base text-gray-600 disabled:text-gray-400 hover:text-[#4a7c59] transition-colors disabled:cursor-not-allowed"
+            className="px-6 sm:px-8 lg:px-12 py-3 lg:py-5 text-base sm:text-lg lg:text-2xl text-gray-600 disabled:text-gray-400 hover:text-[#4a7c59] transition-colors disabled:cursor-not-allowed"
           >
             이전
           </button>
-          <span className="text-xs sm:text-sm text-gray-500">
+          <span className="text-base sm:text-lg lg:text-2xl text-gray-500">
             {currentQuestionIndex + 1} / {quizQuestions.length}
           </span>
         </div>

@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: "클렌징 밤",
     description:
       "부드럽게 녹여내는 프리미엄 클렌징 밤으로 메이크업과 노폐물을 완벽하게 제거합니다.",
-    image: "/images/100ML CLEANSER_SECONDARY_1_2000X2000_300DPI.jpg",
+    image: "/images/클렌징밤.jpg",
     benefits: [
       "완벽한 메이크업 제거",
       "깊은 모공 정화",
@@ -27,7 +27,7 @@ export const products: Product[] = [
     name: "젤 밤 클렌저",
     description:
       "젤과 밤의 장점을 결합한 혁신적인 클렌저로 상쾌하면서도 촉촉한 세안감을 선사합니다.",
-    image: "/images/100ML GEL BALM CLEANSER_SECONDARY_2000X2000_300DPI.jpg",
+    image: "/images/젤밤클렌저.jpg",
     benefits: [
       "이중 세정 효과",
       "상쾌한 마무리",
@@ -53,7 +53,7 @@ export const products: Product[] = [
     name: "포밍 크림 클렌저",
     description:
       "부드러운 크림 텍스처에서 풍부한 거품이 생성되어 깊은 세정과 영양 공급을 동시에 제공합니다.",
-    image: "/images/FOAMING CREAM CLEANSER_120ML_SECONDARY_2000X2000_300DPI.jpg",
+    image: "/images/포밍크림클렌저.jpg",
     benefits: ["풍부한 거품", "깊은 세정력", "영양 공급", "부드러운 마무리"],
     ingredients: ["콜라겐", "로즈힙오일", "나이아신아마이드", "판테놀"],
     usage:
@@ -69,7 +69,7 @@ export const products: Product[] = [
     name: "클렌징 오일",
     description:
       "가벼우면서도 강력한 세정력의 클렌징 오일로 워터프루프 메이크업까지 깔끔하게 제거합니다.",
-    image: "/images/클렌징오일150.webp",
+    image: "/images/클렌징오일.jpg",
     benefits: [
       "강력한 메이크업 제거",
       "워터프루프 제품 제거",
