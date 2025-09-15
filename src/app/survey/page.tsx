@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { quizQuestions } from "@/data/questions";
@@ -11,6 +11,7 @@ export default function QuizPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [showDiagnosisInput, setShowDiagnosisInput] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [skinDiagnosisData, setSkinDiagnosisData] = useState<SkinDiagnosisData>(
     {
       moisture: 50,
@@ -22,32 +23,56 @@ export default function QuizPage() {
   );
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
-  const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+  const totalQuestions = quizQuestions.length;
+  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+  
+  // Get current answer if exists
+  const currentAnswer = answers.find(a => a.questionId === currentQuestion.id)?.answer;
 
-  const handleAnswer = (answer: string | number | boolean) => {
-    const newAnswer: QuizAnswer = {
-      questionId: currentQuestion.id,
-      answer,
-    };
+  const handleAnswer = useCallback((answer: string | number | boolean) => {
+    setAnswers(prev => {
+      const filtered = prev.filter(a => a.questionId !== currentQuestion.id);
+      return [...filtered, { questionId: currentQuestion.id, answer }];
+    });
+  }, [currentQuestion.id]);
 
-    const updatedAnswers = answers.filter(
-      (a) => a.questionId !== currentQuestion.id
-    );
-    updatedAnswers.push(newAnswer);
-    setAnswers(updatedAnswers);
+  const handleNext = useCallback(() => {
+    if (currentAnswer === undefined) return;
+    
+    setIsTransitioning(true);
+    setTimeout(() => {
+      if (isLastQuestion) {
+        setShowDiagnosisInput(true);
+      } else {
+        setCurrentQuestionIndex(prev => prev + 1);
+      }
+      setIsTransitioning(false);
+    }, 250);
+  }, [currentAnswer, isLastQuestion]);
 
-    if (isLastQuestion) {
-      setShowDiagnosisInput(true);
-    } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
-
-  const handlePrevious = () => {
+  const handleBack = useCallback(() => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentQuestionIndex(prev => prev - 1);
+        setIsTransitioning(false);
+      }, 250);
     }
+  }, [currentQuestionIndex]);
+
+  // Choose layout based on question index (alternating or based on question type)
+  const useLayoutB = currentQuestionIndex % 2 === 1;
+
+  // Photo array for questions (you can customize per question)
+  const getQuestionPhoto = (index: number) => {
+    const photos = [
+      "/images/클렌징밤.jpg",
+      "/images/젤밤클렌저.jpg", 
+      "/images/포밍크림클렌저.jpg",
+      "/images/클렌징오일.jpg"
+    ];
+    return photos[index % photos.length];
   };
 
   const handleSubmit = () => {
@@ -65,25 +90,25 @@ export default function QuizPage() {
 
   if (showDiagnosisInput) {
     return (
-      <div className="min-h-screen gradient-bg py-2 sm:py-4">
-        <div className="max-w-6xl mx-auto px-1 sm:px-2 lg:px-2 xl:px-8">
+      <div className="premium-bg">
+        <div className="container-xl px-4 sm:px-6 lg:px-8 py-8">
           <Link
             href="/"
-            className="inline-flex items-center text-base lg:text-xl text-[#4a7c59] hover:text-[#3d6549] mb-3 lg:mb-4"
+            className="btn btn--quiet mb-8"
           >
             ← 홈으로 돌아가기
           </Link>
 
-          <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-6">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-800 mb-3 lg:mb-4">
-              피부 진단 데이터 (선택사항)
+          <div className="bg-white rounded-lg shadow-sm p-8">
+            <h2 className="text-2xl sm:text-3xl font-light text-slate-900 mb-4 heading-serif">
+              피부 진단 데이터 <span className="text-lg text-slate-600 korean-text">(선택사항)</span>
             </h2>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 mb-4 sm:mb-6">
+            <p className="text-base text-slate-600 mb-8 leading-relaxed">
               오프라인 매장에서 측정한 피부 진단 수치가 있다면 입력해주세요. 더
               정확한 추천을 받을 수 있습니다.
             </p>
 
-            <div className="space-y-3 sm:space-y-4 lg:space-y-4">
+            <div className="space-y-6">
               {[
                 { key: "moisture", label: "수분", unit: "%" },
                 { key: "sebum", label: "유분", unit: "%" },
@@ -93,12 +118,12 @@ export default function QuizPage() {
               ].map((item) => (
                 <div
                   key={item.key}
-                  className="flex items-center justify-between"
+                  className="flex items-center gap-4"
                 >
-                  <label className="text-sm sm:text-base lg:text-lg text-gray-700 font-medium w-16 sm:w-20 lg:w-24">
+                  <label className="text-base text-slate-700 font-medium w-16 korean-text">
                     {item.label}
                   </label>
-                  <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 flex-1 ml-2 sm:ml-3 lg:ml-4">
+                  <div className="flex items-center gap-3 flex-1">
                     <input
                       type="number"
                       min="0"
@@ -112,10 +137,10 @@ export default function QuizPage() {
                           [item.key]: parseInt(e.target.value) || 0,
                         }))
                       }
-                      className="flex-1 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4a7c59] focus:border-transparent text-sm sm:text-base lg:text-lg"
+                      className="flex-1 px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                       placeholder="0-100"
                     />
-                    <span className="text-sm sm:text-base lg:text-lg text-gray-600 w-6 sm:w-8 lg:w-10 text-right">
+                    <span className="text-base text-slate-600 w-8 text-right">
                       {item.unit}
                     </span>
                   </div>
@@ -123,16 +148,16 @@ export default function QuizPage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6 sm:mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <button
                 onClick={skipDiagnosis}
-                className="flex-1 py-3 lg:py-4 text-sm sm:text-base lg:text-lg text-gray-600 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
+                className="btn btn--secondary flex-1"
               >
                 건너뛰기
               </button>
               <button
                 onClick={handleSubmit}
-                className="flex-1 py-3 lg:py-4 text-sm sm:text-base lg:text-lg bg-[#4a7c59] text-white rounded-full hover:bg-[#3d6549] transition-colors"
+                className="btn btn--primary flex-1"
               >
                 결과 확인하기
               </button>
@@ -144,87 +169,126 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen gradient-bg py-2 sm:py-4">
-      <div className="quiz-container max-w-6xl mx-auto px-1 sm:px-2 lg:px-2 xl:px-8">
-        <Link
-          href="/"
-          className="inline-flex items-center text-lg lg:text-2xl text-[#4a7c59] hover:text-[#3d6549] mb-4 lg:mb-6"
-        >
-          ← 홈으로 돌아가기
-        </Link>
-
-        {/* Progress Bar */}
-        <div className="progress-container mb-4 lg:mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-base lg:text-xl text-gray-600">진행상황</span>
-            <span className="text-base lg:text-xl text-gray-600">
-              {currentQuestionIndex + 1} / {quizQuestions.length}
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-[#4a7c59] h-2 rounded-full transition-all duration-300"
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      background: 'var(--surface-primary)',
+      paddingTop: 'var(--safe-area-top)',
+      paddingBottom: 'var(--safe-area-bottom)',
+      paddingLeft: 'var(--safe-area-left)',
+      paddingRight: 'var(--safe-area-right)'
+    }}>
+      {/* Premium App Bar with Progress */}
+      <header className="premium-app-bar">
+        <div className="premium-app-bar__logo">EVE LOM</div>
+        <div className="premium-app-bar__progress">
+          <span>{currentQuestionIndex + 1}/{totalQuestions}</span>
+          <div className="premium-app-bar__progress-bar">
+            <div 
+              className="premium-app-bar__progress-fill"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
+        <button className="premium-app-bar__help" aria-label="도움말">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </header>
 
-        {/* Question Card */}
-        <div className="quiz-question-card bg-white rounded-2xl shadow-lg p-6 sm:p-8 md:p-10 lg:p-10 xl:p-8 mb-6">
-          <h2 className="quiz-question-title text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-3xl font-medium text-gray-800 mb-6 sm:mb-8 lg:mb-10 xl:mb-6">
+      {/* Single Question Layout with Photo */}
+      <main className={`premium-quiz ${useLayoutB ? 'premium-quiz--layout-b' : ''}`}>
+        {/* Large Photo Section */}
+        <section className="premium-quiz__photo">
+          <img
+            src={getQuestionPhoto(currentQuestionIndex)}
+            alt={`EVE LOM Quiz Step ${currentQuestionIndex + 1}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
+          />
+        </section>
+
+        {/* Question Panel */}
+        <section className={`premium-quiz__panel ${isTransitioning ? 'premium-quiz__slide--entering' : 'premium-quiz__slide'}`}>
+          <h1 className="premium-quiz__question" style={{fontFamily: 'var(--font-kr)'}}>
             {currentQuestion.question}
-          </h2>
+          </h1>
 
-          <div className="quiz-options space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-4">
+          <div className="premium-quiz__options">
             {currentQuestion.type === "yesno" && (
               <>
-                <button
-                  onClick={() => handleAnswer(true)}
-                  className="quiz-option-button w-full p-4 sm:p-5 md:p-8 lg:p-12 xl:p-6 text-left text-base sm:text-lg md:text-2xl lg:text-4xl xl:text-xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
-                >
-                  예
-                </button>
-                <button
-                  onClick={() => handleAnswer(false)}
-                  className="quiz-option-button w-full p-4 sm:p-5 md:p-8 lg:p-12 xl:p-6 text-left text-base sm:text-lg md:text-2xl lg:text-4xl xl:text-xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
-                >
-                  아니오
-                </button>
+                {[{label: "예", value: true}, {label: "아니오", value: false}].map((option) => (
+                  <label key={String(option.value)} className="premium-quiz__option">
+                    <input
+                      type="radio"
+                      name={currentQuestion.id}
+                      value={String(option.value)}
+                      checked={currentAnswer === option.value}
+                      onChange={() => handleAnswer(option.value)}
+                      className="premium-quiz__option-input"
+                    />
+                    <span className="premium-quiz__option-label">{option.label}</span>
+                  </label>
+                ))}
               </>
             )}
 
-            {(currentQuestion.type === "scale" ||
-              currentQuestion.type === "choice") &&
-              currentQuestion.options?.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() =>
-                    handleAnswer(
-                      currentQuestion.type === "scale" ? index : option
-                    )
-                  }
-                  className="quiz-option-button w-full p-4 sm:p-5 md:p-8 lg:p-12 xl:p-6 text-left text-base sm:text-lg md:text-2xl lg:text-4xl xl:text-xl rounded-xl border border-gray-200 hover:border-[#4a7c59] hover:bg-[#4a7c59]/5 transition-all"
-                >
-                  {option}
-                </button>
+            {(currentQuestion.type === "scale" || currentQuestion.type === "choice") &&
+              currentQuestion.options?.map((option, optionIndex) => (
+                <label key={optionIndex} className="premium-quiz__option">
+                  <input
+                    type="radio"
+                    name={currentQuestion.id}
+                    value={currentQuestion.type === "scale" ? optionIndex : option}
+                    checked={
+                      currentQuestion.type === "scale" 
+                        ? currentAnswer === optionIndex 
+                        : currentAnswer === option
+                    }
+                    onChange={() => 
+                      handleAnswer(
+                        currentQuestion.type === "scale" ? optionIndex : option
+                      )
+                    }
+                    className="premium-quiz__option-input"
+                  />
+                  <span className="premium-quiz__option-label">{option}</span>
+                </label>
               ))}
           </div>
-        </div>
+        </section>
 
-        {/* Navigation */}
-        <div className="navigation-container flex justify-between items-center">
-          <button
-            onClick={handlePrevious}
+        {/* Fixed Action Bar */}
+        <div className="premium-quiz__actions">
+          <button 
+            className="premium-quiz__back"
+            onClick={currentQuestionIndex === 0 ? undefined : handleBack}
             disabled={currentQuestionIndex === 0}
-            className="px-6 sm:px-8 md:px-10 lg:px-12 xl:px-8 py-3 md:py-4 lg:py-5 xl:py-3 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-lg text-gray-600 disabled:text-gray-400 hover:text-[#4a7c59] transition-colors disabled:cursor-not-allowed"
+            style={{opacity: currentQuestionIndex === 0 ? 0.4 : 1}}
           >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"/>
+            </svg>
             이전
           </button>
-          <span className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-lg text-gray-500">
-            {currentQuestionIndex + 1} / {quizQuestions.length}
-          </span>
+
+          <button 
+            className="premium-quiz__next"
+            disabled={currentAnswer === undefined}
+            onClick={handleNext}
+          >
+            {isLastQuestion ? '결과 확인' : '다음'}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"/>
+            </svg>
+          </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

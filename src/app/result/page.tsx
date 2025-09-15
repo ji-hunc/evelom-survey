@@ -78,180 +78,197 @@ function ResultContent() {
   const otherProducts = products.filter((p) => p.id !== recommendedProduct?.id);
 
   return (
-    <div className="min-h-screen gradient-bg py-1">
-      <div className="result-container w-full  mx-auto px-2 lg:px-4 xl:px-6">
-        <Link
-          href="/"
-          className="inline-flex items-center text-base lg:text-lg text-[#4a7c59] hover:text-[#3d6549] mb-1 lg:mb-1"
-        >
-          ← 홈으로 돌아가기
-        </Link>
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      background: 'var(--surface-primary)',
+      paddingTop: 'var(--safe-area-top)',
+      paddingBottom: 'var(--safe-area-bottom)',
+      paddingLeft: 'var(--safe-area-left)',
+      paddingRight: 'var(--safe-area-right)'
+    }}>
+      {/* Premium App Bar */}
+      <header className="premium-app-bar">
+        <div className="premium-app-bar__logo">EVE LOM</div>
+        <div className="premium-app-bar__progress">
+          <span>분석 결과</span>
+        </div>
+        <button className="premium-app-bar__help" aria-label="도움말">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </header>
 
-        {/* Main Result Card - 3분할 레이아웃 */}
-        <div className="result-main-card bg-white rounded-3xl shadow-lg overflow-hidden mb-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 h-full">
-            {/* 왼쪽: 피부 분석 결과 */}
-            <div className="bg-gray-50 flex flex-col">
-              <div className="bg-[#6b8e6b] text-white text-center py-2 lg:py-3">
-                <h3 className="text-lg lg:text-xl font-bold">
-                  피부 분석 결과
-                </h3>
-              </div>
-              <div className="flex-1 flex items-center justify-center p-4 lg:p-6">
-                {skinAnalysisScores && (
-                  <SkinAnalysisChart scores={skinAnalysisScores} animate={true} />
-                )}
-              </div>
+      {/* Premium Results with Snap Scrolling */}
+      <main className="premium-results">
+        {/* Section A - Large Radar Chart Only */}
+        <section className="premium-results__section premium-results__radar-section">
+          <h1 className="premium-results__radar-title">피부 분석 결과</h1>
+          <p className="premium-results__radar-subtitle">
+            6가지 핵심 지표를 통한 당신의 피부 특성 분석
+          </p>
+          
+          <div className="premium-results__radar-container">
+            <div className="premium-results__radar-chart">
+              {skinAnalysisScores && (
+                <SkinAnalysisChart scores={skinAnalysisScores} animate={true} />
+              )}
             </div>
+          </div>
+          
+          <div className="premium-results__scroll-cue" onClick={() => {
+            document.querySelector('.premium-results__product-section')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
+            <span className="premium-results__scroll-text">맞춤 제품 확인하기</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path fillRule="evenodd" d="M8 1a.5.5 0 01.5.5v11.793l3.146-3.147a.5.5 0 01.708.708l-4 4a.5.5 0 01-.708 0l-4-4a.5.5 0 01.708-.708L7.5 13.293V1.5A.5.5 0 018 1z"/>
+            </svg>
+          </div>
+        </section>
 
-            {/* 가운데: 추천 제품 */}
-            <div className="bg-white lg:border-l lg:border-r border-gray-200 flex flex-col">
-              <div className="bg-[#6b8e6b] text-white text-center py-2 lg:py-3">
-                <h3 className="text-lg lg:text-xl font-bold">
-                  추천 제품
-                </h3>
-              </div>
-              <div className="text-center flex-1 flex flex-col justify-center p-4 lg:p-6">
-                <h2 className="text-xl lg:text-2xl font-bold text-[#4a7c59] mb-4">
-                  {recommendedProduct.name}
-                </h2>
-                <div className="aspect-[3/4] bg-gray-50 overflow-hidden rounded-2xl max-w-sm mx-auto">
-                  <img
-                    src={recommendedProduct.image}
-                    alt={recommendedProduct.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* 오른쪽: 제품 설명 */}
-            <div className="bg-gray-50 flex flex-col">
-              <div className="bg-[#6b8e6b] text-white text-center py-2 lg:py-3">
-                <h3 className="text-lg lg:text-xl font-bold">
-                  제품 설명
-                </h3>
+        {/* Section B - Product Recommendation */}
+        <section className="premium-results__section premium-results__product-section">
+          <div className="premium-results__product-content">
+            {/* Product Card - Left Side */}
+            <div className="premium-results__product-card">
+              <div className="premium-results__product-badge">
+                <span style={{width: '8px', height: '8px', background: 'var(--accent-gold)', borderRadius: '50%'}}></span>
+                추천 제품
               </div>
               
-              <div className="flex-1 space-y-4 p-4 lg:p-6">
-                <p className="text-sm lg:text-base text-gray-700 leading-relaxed bg-white p-3 rounded-xl">
-                  {recommendedProduct.description}
-                </p>
+              <img
+                src={recommendedProduct.image}
+                alt={recommendedProduct.name}
+                className="premium-results__product-image"
+              />
+              
+              <h2 className="premium-results__product-name">
+                {recommendedProduct.name}
+              </h2>
+              
+              <p className="premium-results__product-description">
+                {recommendedProduct.description}
+              </p>
+              
+              <button 
+                className="premium-results__product-cta"
+                onClick={() => {
+                  let purchaseUrl = '';
+                  switch(recommendedProduct.id) {
+                    case 'cleansing-balm':
+                      purchaseUrl = 'https://brand.naver.com/evelom/products/9073888748';
+                      break;
+                    case 'foaming-cream-cleanser':
+                      purchaseUrl = 'https://brand.naver.com/evelom/products/10041948380';
+                      break;
+                    case 'cleansing-oil':
+                      purchaseUrl = 'https://brand.naver.com/evelom/products/11805775361';
+                      break;
+                    case 'gel-balm-cleanser':
+                      purchaseUrl = 'https://brand.naver.com/evelom/products/11789821043';
+                      break;
+                    default:
+                      return;
+                  }
+                  window.open(purchaseUrl, '_blank');
+                }}
+              >
+                제품 구매하기
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path fillRule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/>
+                </svg>
+              </button>
+            </div>
 
-                <div>
-                  <h4 className="text-base lg:text-lg font-semibold mb-2 text-gray-800">
-                    주요 성분
-                  </h4>
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    {recommendedProduct.ingredients.map((ingredient, index) => (
-                      <div
-                        key={index}
-                        className="bg-white rounded-lg px-2 py-1 text-center border border-gray-200"
-                      >
-                        <span className="text-xs lg:text-sm font-medium text-gray-700">
-                          {ingredient}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Product Details - Right Side */}
+            <div className="premium-results__details">
+              <h2 className="premium-results__details-title">왜 이 제품인가요?</h2>
+              
+              <div className="premium-results__reason">
+                <div className="premium-results__reason-number">1</div>
+                <div className="premium-results__reason-content">
+                  <h4>맞춤 세정력</h4>
+                  <p>당신의 피부 분석 결과에 따른 최적화된 세정 강도로 피부에 부담 없이 깨끗하게 클렌징합니다.</p>
                 </div>
-
-                <div>
-                  <h4 className="text-base lg:text-lg font-semibold mb-2 text-gray-800">
-                    주요 효과
-                  </h4>
-                  <div className="space-y-1 mb-4">
-                    {recommendedProduct.benefits.slice(0, 3).map((benefit, index) => (
-                      <div key={index} className="flex items-center">
-                        <div className="w-2 h-2 bg-[#4a7c59] rounded-full mr-2 flex-shrink-0"></div>
-                        <span className="text-xs lg:text-sm text-gray-700">
-                          {benefit}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+              </div>
+              
+              <div className="premium-results__reason">
+                <div className="premium-results__reason-number">2</div>
+                <div className="premium-results__reason-content">
+                  <h4>핵심 성분 매칭</h4>
+                  <p>피부 타입별 필수 성분들이 포함되어 있어 클렌징과 동시에 스킨케어 효과를 제공합니다.</p>
                 </div>
-
-                <div>
-                  <h4 className="text-base lg:text-lg font-semibold mb-2 text-gray-800">
-                    사용법
-                  </h4>
-                  <p className="text-xs lg:text-sm text-gray-700 bg-white p-3 rounded-xl mb-4">
-                    {recommendedProduct.usage}
-                  </p>
+              </div>
+              
+              <div className="premium-results__reason">
+                <div className="premium-results__reason-number">3</div>
+                <div className="premium-results__reason-content">
+                  <h4>사용감 최적화</h4>
+                  <p>당신의 라이프스타일과 선호도에 맞는 텍스처와 사용감으로 매일 즐겁게 사용할 수 있습니다.</p>
                 </div>
-
-                <button 
-                  onClick={() => {
-                    let purchaseUrl = '';
-                    switch(recommendedProduct.id) {
-                      case 'cleansing-balm':
-                        purchaseUrl = 'https://brand.naver.com/evelom/products/9073888748';
-                        break;
-                      case 'foaming-cream-cleanser':
-                        purchaseUrl = 'https://brand.naver.com/evelom/products/10041948380';
-                        break;
-                      case 'cleansing-oil':
-                        purchaseUrl = 'https://brand.naver.com/evelom/products/11805775361';
-                        break;
-                      case 'gel-balm-cleanser':
-                        purchaseUrl = 'https://brand.naver.com/evelom/products/11789821043';
-                        break;
-                      default:
-                        return;
-                    }
-                    window.open(purchaseUrl, '_blank');
-                  }}
-                  className="w-full py-3 text-base lg:text-lg font-bold bg-[#4a7c59] text-white rounded-xl hover:bg-[#3d6549] transition-colors cursor-pointer"
-                >
-                  제품 구매하기
-                </button>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Re-survey Button */}
-        <div className="text-center mb-6">
-          <Link
-            href="/survey"
-            className="inline-block px-8 py-3 text-base border border-[#4a7c59] text-[#4a7c59] rounded hover:bg-[#4a7c59] hover:text-white transition-colors"
-          >
-            다시 설문하기
-          </Link>
-        </div>
-
-        {/* Other Products Section */}
-        <div className="mb-8">
-          <h2 className="other-products-title text-2xl font-semibold text-gray-800 text-center mb-6">
-            다른 EVELOM 클렌저
-          </h2>
-          <div className="other-products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProducts.map((product) => (
-              <div
-                key={product.id}
-                className="other-product-card bg-white rounded-2xl shadow hover:shadow-md transition-shadow overflow-hidden"
-              >
-                <div className="aspect-[3/4] bg-gray-50 overflow-hidden">
+        {/* Section C - Other Cleansers */}
+        <section className="premium-results__section premium-results__other-section">
+          <div className="premium-results__other-content">
+            <div className="premium-results__other-header">
+              <h2 className="premium-results__other-title">다른 EVE LOM 클렌저</h2>
+              <p className="premium-results__other-subtitle">다른 제품들도 함께 살펴보세요</p>
+            </div>
+            
+            <div className="premium-results__other-grid">
+              {otherProducts.map((product) => (
+                <div key={product.id} className="premium-results__other-card">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="premium-results__other-image"
                   />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">
+                  
+                  <h3 className="premium-results__other-name">
                     {product.name}
                   </h3>
-                  <p className="text-gray-600 text-base leading-relaxed">
-                    {product.description}
-                  </p>
+                  
+                  <div className="premium-results__other-benefits">
+                    {product.benefits.slice(0, 2).map((benefit, index) => (
+                      <div key={index} className="premium-results__other-benefit">
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <button className="premium-results__other-cta">
+                    자세히 보기
+                  </button>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+        </section>
+
+        {/* Pagination Dots */}
+        <div className="premium-results__pagination">
+          <button 
+            className="premium-results__dot premium-results__dot--active" 
+            onClick={() => document.querySelector('.premium-results__radar-section')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="피부 분석"
+          />
+          <button 
+            className="premium-results__dot" 
+            onClick={() => document.querySelector('.premium-results__product-section')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="추천 제품"
+          />
+          <button 
+            className="premium-results__dot" 
+            onClick={() => document.querySelector('.premium-results__other-section')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="다른 제품들"
+          />
         </div>
-      </div>
+      </main>
     </div>
   );
 }

@@ -4,132 +4,64 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen gradient-bg">
-      {/* Header */}
-      <header className="py-3 sm:py-4 md:py-3 lg:py-4 px-4 sm:px-6 border-b border-white/20">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold gradient-text">
-            EVELOM
-          </h1>
-          <nav className="flex space-x-4 sm:space-x-8">
-            <Link
-              href="/"
-              className="text-sm sm:text-base text-gray-700 hover:text-[#4a7c59] transition-colors"
-            >
-              홈
-            </Link>
-            <Link
-              href="/survey"
-              className="text-sm sm:text-base text-gray-700 hover:text-[#4a7c59] transition-colors"
-            >
-              설문 시작
-            </Link>
-          </nav>
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      background: 'var(--surface-primary)',
+      paddingTop: 'var(--safe-area-top)',
+      paddingBottom: 'var(--safe-area-bottom)',
+      paddingLeft: 'var(--safe-area-left)',
+      paddingRight: 'var(--safe-area-right)'
+    }}>
+      {/* Premium App Bar */}
+      <header className="premium-app-bar">
+        <div className="premium-app-bar__logo">EVE LOM</div>
+        <div className="premium-app-bar__progress">
+          <span>프리미엄 클렌저 추천</span>
         </div>
+        <button className="premium-app-bar__help" aria-label="도움말">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
       </header>
 
-      {/* Hero Section */}
-      <section className="main-hero py-6 sm:py-8 md:py-6 lg:py-8 px-4 sm:px-6">
-        <div className="main-container max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-2 sm:mb-3 md:mb-2 lg:mb-3 text-gray-800 leading-tight">
-            당신만을 위한
-            <span className="gradient-text font-medium"> 클렌저</span>를
+      {/* Photo-Dominant Home Layout - 60/40 Split */}
+      <main className="premium-home">
+        {/* Large Photo Section - 60% */}
+        <section className="premium-home__photo">
+          <img
+            src="/images/클렌징밤.jpg"
+            alt="EVE LOM Premium Cleanser Collection"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
+          />
+        </section>
+
+        {/* Content Section - 40% */}
+        <section className="premium-home__content">
+          <h1 className="premium-home__title">
+            당신만을 위한<br />
+            <span style={{color: 'var(--accent-gold)'}}>맞춤 클렌저</span>를<br />
             찾아보세요
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4 sm:mb-6 md:mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed px-4">
-            8개의 설문문항을 통해 4가지 프리미엄 클렌저 중에서 당신의 피부에
-            가장 완벽하게 맞는 제품을 추천해드립니다.
-          </p>
-          <Link
-            href="/survey"
-            className="main-cta-button inline-block bg-[#4a7c59] text-white px-5 sm:px-6 md:px-7 lg:px-8 py-2 sm:py-3 md:py-3 lg:py-4 rounded-full text-sm sm:text-base md:text-lg font-medium hover:bg-[#3d6549] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            설문 시작하기
-          </Link>
-        </div>
-      </section>
-
-      {/* Product Preview Section */}
-      <section className="py-6 sm:py-8 md:py-6 lg:py-8 px-4 sm:px-6 bg-white/50">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-light text-center mb-4 sm:mb-6 md:mb-4 lg:mb-6 text-gray-800">
-            EVELOM 클렌저 컬렉션
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-            {[
-              {
-                name: "클렌징 밤",
-                desc: "부드럽게 녹여내는 프리미엄 밤",
-                image: "/images/클렌징밤.jpg",
-              },
-              {
-                name: "젤 밤 클렌저",
-                desc: "젤과 밤의 완벽한 조화",
-                image: "/images/젤밤클렌저.jpg",
-              },
-              {
-                name: "포밍 크림 클렌저",
-                desc: "풍부한 거품과 깊은 영양",
-                image: "/images/포밍크림클렌저.jpg",
-              },
-              {
-                name: "클렌징 오일",
-                desc: "강력한 세정력의 가벼운 오일",
-                image: "/images/클렌징오일.jpg",
-              },
-            ].map((product, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className="bg-white rounded-2xl shadow-sm group-hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-2 overflow-hidden">
-                  <div className="aspect-[3/4] bg-white overflow-hidden rounded-t-2xl">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h4 className="text-lg font-medium text-gray-800 mb-2">
-                      {product.name}
-                    </h4>
-                    <p className="text-sm text-gray-600">{product.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
-        <div className="main-container max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl sm:text-3xl font-light mb-4 sm:mb-6 text-gray-800">
-            피부 타입에 맞는 완벽한 클렌저를 만나보세요
-          </h3>
-          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 px-4">
-            전문적인 설문조사와 선택적 피부 진단 데이터를 통해 가장 적합한
-            제품을 추천해드립니다.
-          </p>
-          <Link
-            href="/survey"
-            className="main-cta-button inline-block bg-gradient-to-r from-[#4a7c59] to-[#7db46c] text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-          >
-            지금 시작하기
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-white/20">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-3xl font-bold gradient-text mb-4">
-            EVELOM
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
-            프리미엄 스킨케어 브랜드
+          
+          <p className="premium-home__subtitle" style={{fontFamily: 'var(--font-kr)'}}>
+            8개의 간단한 설문을 통해 4가지 프리미엄 클렌저 중에서 당신의 피부에 완벽하게 맞는 제품을 추천해드립니다.
           </p>
-        </div>
-      </footer>
+          
+          <Link href="/survey" className="premium-cta">
+            설문 시작하기
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </Link>
+        </section>
+      </main>
     </div>
   );
 }
