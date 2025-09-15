@@ -181,7 +181,29 @@ function ResultContent() {
                   </p>
                 </div>
 
-                <button className="w-full py-3 text-base lg:text-lg font-bold bg-[#4a7c59] text-white rounded-xl hover:bg-[#3d6549] transition-colors">
+                <button 
+                  onClick={() => {
+                    let purchaseUrl = '';
+                    switch(recommendedProduct.id) {
+                      case 'cleansing-balm':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/9073888748';
+                        break;
+                      case 'foaming-cream-cleanser':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/10041948380';
+                        break;
+                      case 'cleansing-oil':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/11805775361';
+                        break;
+                      case 'gel-balm-cleanser':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/11789821043';
+                        break;
+                      default:
+                        return;
+                    }
+                    window.open(purchaseUrl, '_blank');
+                  }}
+                  className="w-full py-3 text-base lg:text-lg font-bold bg-[#4a7c59] text-white rounded-xl hover:bg-[#3d6549] transition-colors cursor-pointer"
+                >
                   제품 구매하기
                 </button>
               </div>

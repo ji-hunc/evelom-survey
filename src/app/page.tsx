@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen gradient-bg">
       {/* Header */}
-      <header className="py-4 sm:py-6 px-4 sm:px-6 border-b border-white/20">
+      <header className="py-3 sm:py-4 md:py-3 lg:py-4 px-4 sm:px-6 border-b border-white/20">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <h1 className="text-xl sm:text-2xl font-bold gradient-text">
             EVELOM
@@ -29,20 +29,20 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="main-hero py-8 sm:py-12 px-4 sm:px-6">
+      <section className="main-hero py-6 sm:py-8 md:py-6 lg:py-8 px-4 sm:px-6">
         <div className="main-container max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-3 sm:mb-4 text-gray-800 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-2 sm:mb-3 md:mb-2 lg:mb-3 text-gray-800 leading-tight">
             당신만을 위한
             <span className="gradient-text font-medium"> 클렌저</span>를
             찾아보세요
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4 sm:mb-6 md:mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed px-4">
             8개의 설문문항을 통해 4가지 프리미엄 클렌저 중에서 당신의 피부에
             가장 완벽하게 맞는 제품을 추천해드립니다.
           </p>
           <Link
             href="/survey"
-            className="main-cta-button inline-block bg-[#4a7c59] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:bg-[#3d6549] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="main-cta-button inline-block bg-[#4a7c59] text-white px-5 sm:px-6 md:px-7 lg:px-8 py-2 sm:py-3 md:py-3 lg:py-4 rounded-full text-sm sm:text-base md:text-lg font-medium hover:bg-[#3d6549] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             설문 시작하기
           </Link>
@@ -50,9 +50,9 @@ export default function Home() {
       </section>
 
       {/* Product Preview Section */}
-      <section className="py-8 sm:py-12 px-4 sm:px-6 bg-white/50">
+      <section className="py-6 sm:py-8 md:py-6 lg:py-8 px-4 sm:px-6 bg-white/50">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl sm:text-3xl font-light text-center mb-6 sm:mb-10 text-gray-800">
+          <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-light text-center mb-4 sm:mb-6 md:mb-4 lg:mb-6 text-gray-800">
             EVELOM 클렌저 컬렉션
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
