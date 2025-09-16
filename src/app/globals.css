@@ -7,16 +7,22 @@
 
 /* Light-only theme with premium photo-forward aesthetics */
 :root {
+  /* Safari Browser Layout for iPad Landscape */
+  --appbar-h: 72px;
+  --top-safe: calc(env(safe-area-inset-top) + 8px);
+  --bottom-safe: calc(env(safe-area-inset-bottom) + 48px);
+  --left-safe: env(safe-area-inset-left, 0px);
+  --right-safe: env(safe-area-inset-right, 0px);
+  
+  /* Available viewport dimensions after Safari chrome */
+  --available-height: calc(100dvh - var(--appbar-h) - var(--top-safe) - var(--bottom-safe));
+  --available-width: calc(100vw - var(--left-safe) - var(--right-safe));
+  
   /* iPad Pro Dimensions & Safe Areas */
   --ipad-pro-13-width: 1366px;
   --ipad-pro-13-height: 1024px;
   --ipad-pro-11-width: 1194px;
   --ipad-pro-11-height: 834px;
-  
-  --safe-area-top: env(safe-area-inset-top, 0px);
-  --safe-area-bottom: env(safe-area-inset-bottom, 24px);
-  --safe-area-left: env(safe-area-inset-left, 0px);
-  --safe-area-right: env(safe-area-inset-right, 0px);
   
   /* Premium Light Surfaces - NO BLACK BACKGROUNDS */
   --surface-primary: #FFFFFF;
@@ -69,9 +75,9 @@
   --transition-smooth: 250ms ease-out;
   --transition-snap: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
-  /* Radar Chart Sizes */
-  --radar-size-13: 620px;
-  --radar-size-11: 540px;
+  /* Radar Chart Sizes - Meeting minimum diameter requirements */
+  --radar-size-13: 700px; /* 680-720px range for 12.9" iPad */
+  --radar-size-11: 620px; /* 600-640px range for 11" iPad */
 }
 
 /* Kiosk Base Reset */
@@ -205,9 +211,8 @@ input, select, textarea {
 
 /* Photo-Dominant Home Layout */
 .premium-home {
-  width: 100vw;
-  height: calc(100vh - var(--app-bar-height));
-  height: calc(100dvh - var(--app-bar-height));
+  width: var(--available-width);
+  height: var(--available-height);
   display: grid;
   grid-template-columns: 3fr 2fr; /* 60/40 split */
   background: var(--surface-primary);
@@ -289,18 +294,17 @@ input, select, textarea {
 
 /* Quiz Container - Single Question per Step */
 .premium-quiz {
-  width: 100vw;
-  height: calc(100vh - var(--app-bar-height));
-  height: calc(100dvh - var(--app-bar-height));
+  width: var(--available-width);
+  height: var(--available-height);
   display: grid;
-  grid-template-columns: 55fr 45fr; /* Layout A: Photo 55%, Question 45% */
+  grid-template-columns: 55fr 45fr; /* Consistent split: Photo 55%, Question 45% */
   background: var(--surface-primary);
   overflow: hidden;
 }
 
+/* Consistent Split Layout - No layout B variation */
 .premium-quiz--layout-b {
-  grid-template-columns: 1fr; /* Layout B: Full-bleed photo with overlay card */
-  position: relative;
+  grid-template-columns: 55fr 45fr; /* Same split as layout A */
 }
 
 /* Quiz Photo Section */
@@ -330,22 +334,7 @@ input, select, textarea {
   position: relative;
 }
 
-/* Layout B: Overlay Card */
-.premium-quiz--layout-b .premium-quiz__panel {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--surface-card);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: var(--space-8);
-  margin: var(--space-8);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 480px;
-  width: calc(100% - 2 * var(--space-8));
-}
+/* Consistent Panel Styling - No overlay variations */
 
 .premium-quiz__question {
   font-family: 'Cormorant Garamond', serif;
@@ -433,10 +422,7 @@ input, select, textarea {
   border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.premium-quiz--layout-b .premium-quiz__actions {
-  position: fixed;
-  background: var(--surface-overlay);
-}
+/* Consistent actions bar positioning */
 
 .premium-quiz__back {
   display: inline-flex;
@@ -489,21 +475,15 @@ input, select, textarea {
   box-shadow: 0 8px 24px rgba(201, 179, 126, 0.3);
 }
 
-/* Quiz Slide Transition */
+/* No Quiz Animations - Static Content Only */
 .premium-quiz__slide {
   opacity: 1;
-  transform: translateX(0);
-  transition: all var(--transition-smooth);
+  transform: none;
 }
 
 .premium-quiz__slide--entering {
-  opacity: 0;
-  transform: translateX(100px);
-}
-
-.premium-quiz__slide--exiting {
-  opacity: 0;
-  transform: translateX(-100px);
+  opacity: 1;
+  transform: none;
 }
 
 /* ===== PREMIUM RESULTS SECTIONS ===== */
@@ -529,16 +509,15 @@ input, select, textarea {
   scrollbar-width: none;
 }
 
-/* Section Base */
+/* Section Base - Safari Compatible */
 .premium-results__section {
-  height: 100vh;
-  height: 100dvh;
+  height: var(--available-height);
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-top: var(--app-bar-height);
+  padding-top: var(--appbar-h);
 }
 
 /* Section A - Large Radar Chart Focus */
@@ -642,11 +621,11 @@ input, select, textarea {
 .premium-results__product-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-12);
+  gap: var(--space-16);
   max-width: var(--grid-max-width);
   margin: 0 auto;
   align-items: center;
-  height: calc(100vh - var(--app-bar-height) - 2 * var(--space-8));
+  height: calc(var(--available-height) - var(--appbar-h) - 2 * var(--space-8));
 }
 
 .premium-results__product-card {
@@ -673,13 +652,13 @@ input, select, textarea {
 }
 
 .premium-results__product-image {
-  width: 240px;
-  height: 240px;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
-  border-radius: 16px;
-  margin: 0 auto var(--space-6);
+  border-radius: 20px;
+  margin: 0 auto var(--space-8);
   background: var(--surface-secondary);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
 }
 
 .premium-results__product-name {
@@ -788,7 +767,7 @@ input, select, textarea {
 .premium-results__other-content {
   max-width: var(--grid-max-width);
   margin: 0 auto;
-  height: calc(100vh - var(--app-bar-height) - 2 * var(--space-8));
+  height: calc(var(--available-height) - var(--appbar-h) - 2 * var(--space-8));
   display: flex;
   flex-direction: column;
 }
@@ -819,10 +798,12 @@ input, select, textarea {
 
 .premium-results__other-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
   flex: 1;
-  align-content: start;
+  align-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .premium-results__other-card {
@@ -844,12 +825,13 @@ input, select, textarea {
 }
 
 .premium-results__other-image {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 12px;
-  margin: 0 auto var(--space-4);
+  border-radius: 16px;
+  margin: 0 auto var(--space-6);
   background: var(--surface-secondary);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .premium-results__other-name {

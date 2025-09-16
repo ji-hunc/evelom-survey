@@ -8,10 +8,10 @@ export default function Home() {
       width: '100vw',
       height: '100vh',
       background: 'var(--surface-primary)',
-      paddingTop: 'var(--safe-area-top)',
-      paddingBottom: 'var(--safe-area-bottom)',
-      paddingLeft: 'var(--safe-area-left)',
-      paddingRight: 'var(--safe-area-right)'
+      paddingTop: 'var(--top-safe)',
+      paddingBottom: 'var(--bottom-safe)',
+      paddingLeft: 'var(--left-safe)',
+      paddingRight: 'var(--right-safe)'
     }}>
       {/* Premium App Bar */}
       <header className="premium-app-bar">
