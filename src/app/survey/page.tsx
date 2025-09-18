@@ -36,7 +36,20 @@ export default function QuizPage() {
       const filtered = prev.filter(a => a.questionId !== currentQuestion.id);
       return [...filtered, { questionId: currentQuestion.id, answer }];
     });
-  }, [currentQuestion.id]);
+
+    // 답변 후 자동으로 다음 질문으로 이동
+    setTimeout(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        if (isLastQuestion) {
+          setShowDiagnosisInput(true);
+        } else {
+          setCurrentQuestionIndex(prev => prev + 1);
+        }
+        setIsTransitioning(false);
+      }, 250);
+    }, 300); // 답변 선택 후 잠깐 대기
+  }, [currentQuestion.id, isLastQuestion]);
 
   const handleNext = useCallback(() => {
     if (currentAnswer === undefined) return;
@@ -277,16 +290,18 @@ export default function QuizPage() {
             이전
           </button>
 
-          <button 
-            className="premium-quiz__next"
-            disabled={currentAnswer === undefined}
-            onClick={handleNext}
-          >
-            {isLastQuestion ? '결과 확인' : '다음'}
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"/>
-            </svg>
-          </button>
+          {isLastQuestion && (
+            <button
+              className="premium-quiz__next"
+              disabled={currentAnswer === undefined}
+              onClick={handleNext}
+            >
+              결과 확인
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"/>
+              </svg>
+            </button>
+          )}
         </div>
       </main>
     </div>
