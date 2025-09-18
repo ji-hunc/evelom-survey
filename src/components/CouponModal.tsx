@@ -109,9 +109,9 @@ export default function CouponModal({
       const customer = await createCustomerCoupon(customerData);
       setCurrentCustomer(customer);
       setModalState("success");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error creating coupon:", error);
-      const errorMessage = error?.message || error?.error_description || "쿠폰 발급 중 오류가 발생했습니다.";
+      const errorMessage = (error as Error)?.message || (error as { error_description?: string })?.error_description || "쿠폰 발급 중 오류가 발생했습니다.";
       setError(`오류: ${errorMessage}`);
     } finally {
       setLoading(false);

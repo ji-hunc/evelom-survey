@@ -69,7 +69,7 @@ export async function createCustomerCoupon(customer: Omit<CustomerCoupon, 'id' |
 
 export async function updateCouponUsage(phoneNumber: string, isUsed: boolean): Promise<void> {
   try {
-    const updateData: any = {
+    const updateData: { is_used: boolean; used_at?: string | null } = {
       is_used: isUsed,
     };
 

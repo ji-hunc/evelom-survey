@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -30,12 +31,11 @@ export default function Home() {
       <main className="premium-home">
         {/* Large Photo Section - 60% */}
         <section className="premium-home__photo">
-          <img
+          <Image
             src="/images/클렌징밤.jpg"
             alt="EVE LOM Premium Cleanser Collection"
+            fill
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
               objectPosition: 'center'
             }}

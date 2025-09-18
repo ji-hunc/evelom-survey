@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { quizQuestions } from "@/data/questions";
 import { QuizAnswer, SkinDiagnosisData } from "@/types";
 
@@ -201,12 +202,11 @@ export default function QuizPage() {
       <main className={`premium-quiz ${useLayoutB ? 'premium-quiz--layout-b' : ''}`}>
         {/* Large Photo Section */}
         <section className="premium-quiz__photo">
-          <img
+          <Image
             src={getQuestionPhoto(currentQuestionIndex)}
             alt={`EVE LOM Quiz Step ${currentQuestionIndex + 1}`}
+            fill
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
               objectPosition: 'center'
             }}
@@ -226,7 +226,7 @@ export default function QuizPage() {
                   <label key={String(option.value)} className="premium-quiz__option">
                     <input
                       type="radio"
-                      name={currentQuestion.id}
+                      name={String(currentQuestion.id)}
                       value={String(option.value)}
                       checked={currentAnswer === option.value}
                       onChange={() => handleAnswer(option.value)}
@@ -243,7 +243,7 @@ export default function QuizPage() {
                 <label key={optionIndex} className="premium-quiz__option">
                   <input
                     type="radio"
-                    name={currentQuestion.id}
+                    name={String(currentQuestion.id)}
                     value={currentQuestion.type === "scale" ? optionIndex : option}
                     checked={
                       currentQuestion.type === "scale" 

@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Product, QuizAnswer, SkinDiagnosisData } from "@/types";
 import {
   getRecommendedProduct,
@@ -138,10 +139,12 @@ function ResultContent() {
             {/* Product Card - Left Side */}
             <div className="premium-results__product-card">
 
-              <img
+              <Image
                 src={recommendedProduct.image}
                 alt={recommendedProduct.name}
                 className="premium-results__product-image"
+                width={300}
+                height={300}
               />
 
               <h2 className="premium-results__product-name">
@@ -233,10 +236,12 @@ function ResultContent() {
             <div className="premium-results__other-grid">
               {otherProducts.map((product) => (
                 <div key={product.id} className="premium-results__other-card">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
                     className="premium-results__other-image"
+                    width={200}
+                    height={200}
                   />
                   
                   <h3 className="premium-results__other-name">

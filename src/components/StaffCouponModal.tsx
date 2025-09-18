@@ -71,9 +71,9 @@ export default function StaffCouponModal({ isOpen, onClose }: StaffCouponModalPr
       setMessage(`쿠폰 사용 처리가 완료되었습니다.\n고객명: ${customer.name}\n제품: ${customer.recommended_product}`);
       setMessageType("success");
       setPhoneNumber("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error using coupon:", error);
-      const errorMessage = error?.message || error?.error_description || "쿠폰 사용 처리 중 오류가 발생했습니다.";
+      const errorMessage = (error as Error)?.message || (error as { error_description?: string })?.error_description || "쿠폰 사용 처리 중 오류가 발생했습니다.";
       setMessage(`오류: ${errorMessage}`);
       setMessageType("error");
     } finally {
