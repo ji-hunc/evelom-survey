@@ -11,6 +11,8 @@ import {
 } from "@/utils/recommendation";
 import { products } from "@/data/products";
 import SkinAnalysisChart from "@/components/SkinAnalysisChart";
+import StaffCouponModal from "@/components/StaffCouponModal";
+import CouponModal from "@/components/CouponModal";
 
 function ResultContent() {
   const searchParams = useSearchParams();
@@ -20,6 +22,8 @@ function ResultContent() {
   const [skinAnalysisScores, setSkinAnalysisScores] =
     useState<SkinAnalysisScore | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showStaffModal, setShowStaffModal] = useState(false);
+  const [showCouponModal, setShowCouponModal] = useState(false);
 
   useEffect(() => {
     try {
@@ -129,56 +133,62 @@ function ResultContent() {
 
         {/* Section B - Product Recommendation */}
         <section className="premium-results__section premium-results__product-section">
+          <h1 className="premium-results__section-title">추천 제품</h1>
           <div className="premium-results__product-content">
             {/* Product Card - Left Side */}
             <div className="premium-results__product-card">
-              <div className="premium-results__product-badge">
-                <span style={{width: '8px', height: '8px', background: 'var(--accent-gold)', borderRadius: '50%'}}></span>
-                추천 제품
-              </div>
-              
+
               <img
                 src={recommendedProduct.image}
                 alt={recommendedProduct.name}
                 className="premium-results__product-image"
               />
-              
+
               <h2 className="premium-results__product-name">
                 {recommendedProduct.name}
               </h2>
-              
+
               <p className="premium-results__product-description">
                 {recommendedProduct.description}
               </p>
-              
-              <button 
-                className="premium-results__product-cta"
-                onClick={() => {
-                  let purchaseUrl = '';
-                  switch(recommendedProduct.id) {
-                    case 'cleansing-balm':
-                      purchaseUrl = 'https://brand.naver.com/evelom/products/9073888748';
-                      break;
-                    case 'foaming-cream-cleanser':
-                      purchaseUrl = 'https://brand.naver.com/evelom/products/10041948380';
-                      break;
-                    case 'cleansing-oil':
-                      purchaseUrl = 'https://brand.naver.com/evelom/products/11805775361';
-                      break;
-                    case 'gel-balm-cleanser':
-                      purchaseUrl = 'https://brand.naver.com/evelom/products/11789821043';
-                      break;
-                    default:
-                      return;
-                  }
-                  window.open(purchaseUrl, '_blank');
-                }}
-              >
-                제품 구매하기
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path fillRule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/>
-                </svg>
-              </button>
+
+              <div className="premium-results__product-actions">
+                <button
+                  className="premium-results__product-cta premium-results__coupon-btn"
+                  onClick={() => setShowCouponModal(true)}
+                >
+                  🎟️ 10% 할인 쿠폰 받기
+                </button>
+
+                <button
+                  className="premium-results__product-cta premium-results__purchase-btn"
+                  onClick={() => {
+                    let purchaseUrl = '';
+                    switch(recommendedProduct.id) {
+                      case 'cleansing-balm':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/9073888748';
+                        break;
+                      case 'foaming-cream-cleanser':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/10041948380';
+                        break;
+                      case 'cleansing-oil':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/11805775361';
+                        break;
+                      case 'gel-balm-cleanser':
+                        purchaseUrl = 'https://brand.naver.com/evelom/products/11789821043';
+                        break;
+                      default:
+                        return;
+                    }
+                    window.open(purchaseUrl, '_blank');
+                  }}
+                >
+                  제품 구매하기
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path fillRule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
 
             {/* Product Details - Right Side */}
@@ -269,6 +279,28 @@ function ResultContent() {
           />
         </div>
       </main>
+
+      {/* Staff Coupon Button - Fixed Position */}
+      <button
+        onClick={() => setShowStaffModal(true)}
+        className="fixed bottom-4 right-4 bg-gray-600 text-white px-3 py-2 rounded-lg text-xs hover:bg-gray-700 transition-colors z-40 opacity-75"
+        style={{ fontSize: '10px' }}
+      >
+        직원 쿠폰 사용
+      </button>
+
+      {/* Staff Coupon Modal */}
+      <StaffCouponModal
+        isOpen={showStaffModal}
+        onClose={() => setShowStaffModal(false)}
+      />
+
+      {/* Coupon Modal */}
+      <CouponModal
+        isOpen={showCouponModal}
+        onClose={() => setShowCouponModal(false)}
+        recommendedProduct={recommendedProduct?.name || ""}
+      />
     </div>
   );
 }
