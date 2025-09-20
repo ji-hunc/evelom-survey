@@ -234,72 +234,80 @@ export const SectionTitle = styled.h1`
   font-weight: ${theme.typography.fontWeight.light};
   color: ${theme.colors.ink.primary};
   text-align: left;
-  margin-bottom: ${theme.spacing[6]};
+  margin-bottom: 80px;
   letter-spacing: -0.02em;
   margin-top: 0;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    font-size: ${theme.typography.fontSize["4xl"]};
+    font-size: ${theme.typography.fontSize["3xl"]};
     text-align: center;
   }
 `;
 
 export const ProductContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.spacing[12]};
-  align-items: center;
-  max-width: ${theme.layout.maxWidth};
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: ${theme.spacing[16]};
+  align-items: stretch;
+  max-width: 1000px;
   margin: 0 auto;
   width: 100%;
 
   @media (max-width: ${theme.breakpoints.lg}) {
     grid-template-columns: 1fr;
     gap: ${theme.spacing[8]};
+    max-width: 600px;
   }
 `;
 
 export const ProductCard = styled.div`
   text-align: center;
   background: ${theme.colors.surface.secondary};
-  border-radius: ${theme.borderRadius.lg};
+  border-radius: ${theme.borderRadius.xl};
   padding: 0;
-  box-shadow: ${theme.shadows.lg};
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 `;
 
 export const ProductImage = styled.img`
   width: 100%;
-  height: 450px;
+  height: 420px;
   object-fit: cover;
-  margin: 0 0 ${theme.spacing[6]} 0;
-  border-radius: ${theme.borderRadius.md} ${theme.borderRadius.md} 0 0;
+  margin: 0;
+  border-radius: ${theme.borderRadius.xl} ${theme.borderRadius.xl} 0 0;
 `;
 
 export const ProductName = styled.h2`
   font-family: ${theme.typography.fontFamily.heading};
-  font-size: ${theme.typography.fontSize["3xl"]};
-  font-weight: ${theme.typography.fontWeight.light};
+  font-size: ${theme.typography.fontSize["2xl"]};
+  font-weight: ${theme.typography.fontWeight.medium};
   color: ${theme.colors.ink.primary};
-  margin-bottom: ${theme.spacing[4]};
+  margin-bottom: ${theme.spacing[3]};
   letter-spacing: -0.02em;
-  padding: 0 ${theme.spacing[8]};
+  padding: ${theme.spacing[6]} ${theme.spacing[6]} 0 ${theme.spacing[6]};
 `;
 
 export const ProductDescription = styled.p`
-  font-size: ${theme.typography.fontSize.base};
+  font-size: ${theme.typography.fontSize.sm};
   color: ${theme.colors.ink.secondary};
-  line-height: ${theme.typography.lineHeight.relaxed};
-  margin-bottom: ${theme.spacing[6]};
+  line-height: ${theme.typography.lineHeight.normal};
+  margin-bottom: ${theme.spacing[4]};
   font-family: ${theme.typography.fontFamily.body};
-  padding: 0 ${theme.spacing[8]};
+  padding: 0 ${theme.spacing[6]};
+  flex: 1;
 `;
 
 export const ProductActions = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing[3]};
-  padding: 0 ${theme.spacing[8]} ${theme.spacing[8]} ${theme.spacing[8]};
+  padding: ${theme.spacing[2]} ${theme.spacing[6]} ${theme.spacing[6]}
+    ${theme.spacing[6]};
 `;
 
 export const CouponButton = styled.button`
@@ -324,20 +332,18 @@ export const CouponButton = styled.button`
 export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing[6]};
-
-  ${SectionTitle} {
-    margin-bottom: ${theme.spacing[6]};
-  }
+  justify-content: center;
+  gap: ${theme.spacing[4]};
+  padding: ${theme.spacing[4]} 0;
 `;
 
 export const DetailsTitle = styled.h2`
   font-family: ${theme.typography.fontFamily.heading};
-  font-size: ${theme.typography.fontSize["3xl"]};
+  font-size: ${theme.typography.fontSize["2xl"]};
   font-weight: ${theme.typography.fontWeight.medium};
   color: ${theme.colors.ink.primary};
   letter-spacing: -0.02em;
-  margin-top: 30px;
+  margin-bottom: ${theme.spacing[6]};
 `;
 
 export const Reason = styled.div`
@@ -345,15 +351,15 @@ export const Reason = styled.div`
   gap: ${theme.spacing[4]};
   align-items: flex-start;
   background: rgba(201, 179, 126, 0.08);
-  padding: ${theme.spacing[6]};
-  border-radius: ${theme.borderRadius.lg};
+  padding: ${theme.spacing[5]};
+  border-radius: ${theme.borderRadius.md};
   border: 1px solid rgba(201, 179, 126, 0.2);
   box-shadow: 0 2px 8px rgba(201, 179, 126, 0.1);
   transition: all ${theme.transitions.quick};
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(201, 179, 126, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201, 179, 126, 0.15);
   }
 `;
 
