@@ -96,10 +96,15 @@ function ResultContent() {
     >
       {/* Premium App Bar */}
       <header className="premium-app-bar">
-        <div className="premium-app-bar__logo">EVE LOM</div>
-        <div className="premium-app-bar__progress">
-          <span>분석 결과</span>
-        </div>
+        <Link href="/" className="premium-app-bar__logo">
+          <Image
+            src="/images/logo.png"
+            alt="EVE LOM"
+            width={120}
+            height={45}
+            style={{ objectFit: "contain" }}
+          />
+        </Link>
         <button className="premium-app-bar__help" aria-label="도움말">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path
@@ -186,38 +191,17 @@ function ResultContent() {
                 왜 이 제품인가요?
               </h2>
 
-              <div className="premium-results__reason">
-                <div className="premium-results__reason-number">1</div>
-                <div className="premium-results__reason-content">
-                  <h4>맞춤 세정력</h4>
-                  <p>
-                    당신의 피부 분석 결과에 따른 최적화된 세정 강도로 피부에
-                    부담 없이 깨끗하게 클렌징합니다.
-                  </p>
+              {recommendedProduct.reasons.map((reason, index) => (
+                <div key={index} className="premium-results__reason">
+                  <div className="premium-results__reason-number">
+                    {index + 1}
+                  </div>
+                  <div className="premium-results__reason-content">
+                    <h4>{reason.title}</h4>
+                    <p>{reason.description}</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="premium-results__reason">
-                <div className="premium-results__reason-number">2</div>
-                <div className="premium-results__reason-content">
-                  <h4>핵심 성분 매칭</h4>
-                  <p>
-                    피부 타입별 필수 성분들이 포함되어 있어 클렌징과 동시에
-                    스킨케어 효과를 제공합니다.
-                  </p>
-                </div>
-              </div>
-
-              <div className="premium-results__reason">
-                <div className="premium-results__reason-number">3</div>
-                <div className="premium-results__reason-content">
-                  <h4>사용감 최적화</h4>
-                  <p>
-                    당신의 라이프스타일과 선호도에 맞는 텍스처와 사용감으로 매일
-                    즐겁게 사용할 수 있습니다.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -250,7 +234,7 @@ function ResultContent() {
                   </h3>
 
                   <div className="premium-results__other-benefits">
-                    {product.benefits.slice(0, 2).map((benefit, index) => (
+                    {product.benefits.slice(0, 3).map((benefit, index) => (
                       <div
                         key={index}
                         className="premium-results__other-benefit"
@@ -268,37 +252,6 @@ function ResultContent() {
             </div>
           </div>
         </section>
-
-        {/* Pagination Dots */}
-        <div className="premium-results__pagination">
-          <button
-            className="premium-results__dot premium-results__dot--active"
-            onClick={() =>
-              document
-                .querySelector(".premium-results__radar-section")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            aria-label="피부 분석"
-          />
-          <button
-            className="premium-results__dot"
-            onClick={() =>
-              document
-                .querySelector(".premium-results__product-section")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            aria-label="추천 제품"
-          />
-          <button
-            className="premium-results__dot"
-            onClick={() =>
-              document
-                .querySelector(".premium-results__other-section")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            aria-label="다른 제품들"
-          />
-        </div>
       </main>
 
       {/* Staff Coupon Button - Fixed Position */}

@@ -111,7 +111,10 @@ export default function CouponModal({
       setModalState("success");
     } catch (error: unknown) {
       console.error("Error creating coupon:", error);
-      const errorMessage = (error as Error)?.message || (error as { error_description?: string })?.error_description || "쿠폰 발급 중 오류가 발생했습니다.";
+      const errorMessage =
+        (error as Error)?.message ||
+        (error as { error_description?: string })?.error_description ||
+        "쿠폰 발급 중 오류가 발생했습니다.";
       setError(`오류: ${errorMessage}`);
     } finally {
       setLoading(false);
@@ -173,7 +176,9 @@ export default function CouponModal({
         {/* Header with Close Button */}
         <div className="flex justify-between items-center p-6 border-b border-gray-100">
           <h2 className="text-xl font-bold text-gray-800">
-            {modalState === "form" ? "🎉 특별 할인 쿠폰" : "✅ 쿠폰 발급 완료"}
+            {modalState === "form"
+              ? "🎉 POP-UP 특별 할인 쿠폰"
+              : "🎉 쿠폰 발급 완료"}
           </h2>
           <button
             onClick={handleClose}

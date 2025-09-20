@@ -11,6 +11,10 @@ export interface Product {
     concerns: string[];
     lifestyle: string[];
   };
+  reasons: {
+    title: string;
+    description: string;
+  }[];
 }
 
 export interface QuizQuestion {
