@@ -14,6 +14,7 @@ import { products } from "@/data/products";
 import SkinAnalysisChart from "@/components/SkinAnalysisChart";
 import StaffCouponModal from "@/components/StaffCouponModal";
 import CouponModal from "@/components/CouponModal";
+import * as S from "@/components/styled/ResultPageStyles";
 
 function ResultContent() {
   const searchParams = useSearchParams();
@@ -39,6 +40,8 @@ function ResultContent() {
 
         const product = getRecommendedProduct(answers, diagnosis);
         const analysisScores = calculateSkinAnalysisScores(answers);
+
+        console.log("🧮 계산된 analysisScores:", analysisScores);
 
         setRecommendedProduct(product);
         setSkinAnalysisScores(analysisScores);
@@ -83,20 +86,10 @@ function ResultContent() {
   const otherProducts = products.filter((p) => p.id !== recommendedProduct?.id);
 
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        background: "var(--surface-primary)",
-        paddingTop: "var(--top-safe)",
-        paddingBottom: "var(--bottom-safe)",
-        paddingLeft: "var(--left-safe)",
-        paddingRight: "var(--right-safe)",
-      }}
-    >
+    <S.Container>
       {/* Premium App Bar */}
-      <header className="premium-app-bar">
-        <Link href="/" className="premium-app-bar__logo">
+      <S.AppBar>
+        <S.Logo as={Link} href="/">
           <Image
             src="/images/logo.png"
             alt="EVE LOM"
@@ -104,8 +97,8 @@ function ResultContent() {
             height={45}
             style={{ objectFit: "contain" }}
           />
-        </Link>
-        <button className="premium-app-bar__help" aria-label="도움말">
+        </S.Logo>
+        <S.HelpButton aria-label="도움말">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path
               fillRule="evenodd"
@@ -113,155 +106,110 @@ function ResultContent() {
               clipRule="evenodd"
             />
           </svg>
-        </button>
-      </header>
+        </S.HelpButton>
+      </S.AppBar>
 
       {/* Premium Results with Snap Scrolling */}
-      <main className="premium-results">
+      <S.ResultsMain>
         {/* Section A - Large Radar Chart Only */}
-        <section className="premium-results__section premium-results__radar-section">
-          <h1 className="premium-results__radar-title">피부 분석 결과</h1>
-          <p className="premium-results__radar-subtitle">
+        <S.RadarSection>
+          <S.RadarTitle>피부 분석 결과</S.RadarTitle>
+          <S.RadarSubtitle>
             6가지 핵심 지표를 통한 당신의 피부 특성 분석
-          </p>
+          </S.RadarSubtitle>
 
-          <div className="premium-results__radar-container">
-            <div className="premium-results__radar-chart">
+          <S.RadarContainer>
+            <S.RadarChart>
               {skinAnalysisScores && (
                 <SkinAnalysisChart scores={skinAnalysisScores} animate={true} />
               )}
-            </div>
-          </div>
-
-          <div
-            className="premium-results__scroll-cue"
-            onClick={() => {
-              document
-                .querySelector(".premium-results__product-section")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            <span className="premium-results__scroll-text">
-              맞춤 제품 확인하기
-            </span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M8 1a.5.5 0 01.5.5v11.793l3.146-3.147a.5.5 0 01.708.708l-4 4a.5.5 0 01-.708 0l-4-4a.5.5 0 01.708-.708L7.5 13.293V1.5A.5.5 0 018 1z"
-              />
-            </svg>
-          </div>
-        </section>
+            </S.RadarChart>
+          </S.RadarContainer>
+        </S.RadarSection>
 
         {/* Section B - Product Recommendation */}
-        <section className="premium-results__section premium-results__product-section">
-          <h1 className="premium-results__section-title">추천 제품</h1>
-          <div className="premium-results__product-content">
+        <S.ProductSection data-section="product">
+          <S.SectionTitle>추천 제품</S.SectionTitle>
+          <S.ProductContent>
             {/* Product Card - Left Side */}
-            <div className="premium-results__product-card">
-              <Image
+            <S.ProductCard>
+              <S.ProductImage
+                as={Image}
                 src={recommendedProduct.image}
                 alt={recommendedProduct.name}
-                className="premium-results__product-image"
                 width={300}
                 height={300}
               />
 
-              <h2 className="premium-results__product-name">
-                {recommendedProduct.name}
-              </h2>
+              <S.ProductName>{recommendedProduct.name}</S.ProductName>
 
-              <p className="premium-results__product-description">
+              <S.ProductDescription>
                 {recommendedProduct.description}
-              </p>
+              </S.ProductDescription>
 
-              <div className="premium-results__product-actions">
-                <button
-                  className="premium-results__product-cta premium-results__coupon-btn"
-                  onClick={() => setShowCouponModal(true)}
-                >
+              <S.ProductActions>
+                <S.CouponButton onClick={() => setShowCouponModal(true)}>
                   🎟️ 10% 할인 쿠폰 받기
-                </button>
-              </div>
-            </div>
+                </S.CouponButton>
+              </S.ProductActions>
+            </S.ProductCard>
 
             {/* Product Details - Right Side */}
-            <div className="premium-results__details">
-              <h2 className="premium-results__details-title">
-                왜 이 제품인가요?
-              </h2>
+            <S.ProductDetails>
+              <S.DetailsTitle>왜 이 제품인가요?</S.DetailsTitle>
 
               {recommendedProduct.reasons.map((reason, index) => (
-                <div key={index} className="premium-results__reason">
-                  <div className="premium-results__reason-number">
-                    {index + 1}
-                  </div>
-                  <div className="premium-results__reason-content">
+                <S.Reason key={index}>
+                  <S.ReasonNumber>{index + 1}</S.ReasonNumber>
+                  <S.ReasonContent>
                     <h4>{reason.title}</h4>
                     <p>{reason.description}</p>
-                  </div>
-                </div>
+                  </S.ReasonContent>
+                </S.Reason>
               ))}
-            </div>
-          </div>
-        </section>
+            </S.ProductDetails>
+          </S.ProductContent>
+        </S.ProductSection>
 
         {/* Section C - Other Cleansers */}
-        <section className="premium-results__section premium-results__other-section">
-          <div className="premium-results__other-content">
-            <div className="premium-results__other-header">
-              <h2 className="premium-results__other-title">
-                다른 EVE LOM 클렌저
-              </h2>
-              <p className="premium-results__other-subtitle">
-                다른 제품들도 함께 살펴보세요
-              </p>
-            </div>
+        <S.OtherSection data-section="other">
+          <S.OtherContent>
+            <S.OtherHeader>
+              <S.OtherTitle>다른 EVE LOM 클렌저</S.OtherTitle>
+              <S.OtherSubtitle>다른 제품들도 함께 살펴보세요</S.OtherSubtitle>
+            </S.OtherHeader>
 
-            <div className="premium-results__other-grid">
+            <S.OtherGrid>
               {otherProducts.map((product) => (
-                <div key={product.id} className="premium-results__other-card">
-                  <Image
+                <S.OtherCard key={product.id}>
+                  <S.OtherImage
+                    as={Image}
                     src={product.image}
                     alt={product.name}
-                    className="premium-results__other-image"
                     width={200}
                     height={200}
                   />
 
-                  <h3 className="premium-results__other-name">
-                    {product.name}
-                  </h3>
+                  <S.OtherName>{product.name}</S.OtherName>
 
-                  <div className="premium-results__other-benefits">
+                  <S.OtherBenefits>
                     {product.benefits.slice(0, 3).map((benefit, index) => (
-                      <div
-                        key={index}
-                        className="premium-results__other-benefit"
-                      >
-                        {benefit}
-                      </div>
+                      <S.OtherBenefit key={index}>{benefit}</S.OtherBenefit>
                     ))}
-                  </div>
+                  </S.OtherBenefits>
 
-                  <button className="premium-results__other-cta">
-                    자세히 보기
-                  </button>
-                </div>
+                  <S.OtherCTA>자세히 보기</S.OtherCTA>
+                </S.OtherCard>
               ))}
-            </div>
-          </div>
-        </section>
-      </main>
+            </S.OtherGrid>
+          </S.OtherContent>
+        </S.OtherSection>
+      </S.ResultsMain>
 
       {/* Staff Coupon Button - Fixed Position */}
-      <button
-        onClick={() => setShowStaffModal(true)}
-        className="fixed bottom-4 right-4 bg-gray-600 text-white px-3 py-2 rounded-lg text-xs hover:bg-gray-700 transition-colors z-40 opacity-75"
-        style={{ fontSize: "10px" }}
-      >
+      <S.StaffButton onClick={() => setShowStaffModal(true)}>
         직원 쿠폰 사용
-      </button>
+      </S.StaffButton>
 
       {/* Staff Coupon Modal */}
       <StaffCouponModal
@@ -275,7 +223,7 @@ function ResultContent() {
         onClose={() => setShowCouponModal(false)}
         recommendedProduct={recommendedProduct?.name || ""}
       />
-    </div>
+    </S.Container>
   );
 }
 

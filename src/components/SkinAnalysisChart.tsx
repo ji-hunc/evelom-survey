@@ -12,6 +12,8 @@ export default function SkinAnalysisChart({
   scores,
   animate = true,
 }: SkinAnalysisChartProps) {
+  console.log("🔍 SkinAnalysisChart - 받은 scores:", scores);
+
   const [animatedScores, setAnimatedScores] = useState<SkinAnalysisScore>({
     CPN: 0,
     MWL: 0,
@@ -23,11 +25,11 @@ export default function SkinAnalysisChart({
 
   const labels = [
     { key: "CPN", label: "클렌징 강도", color: "#4a7c59" },
-    { key: "MWL", label: "메이크업 부담", color: "#6b8e6b" },
-    { key: "SCP", label: "피지·모공 케어", color: "#8ca08c" },
-    { key: "HSN", label: "수분 보강", color: "#a6b2a6" },
-    { key: "BGN", label: "민감 케어", color: "#c0c4c0" },
-    { key: "EUD", label: "환경·UV 방어", color: "#d6d9d6" },
+    { key: "MWL", label: "메이크업 부담", color: "#2563eb" },
+    { key: "SCP", label: "피지·모공 케어", color: "#dc2626" },
+    { key: "HSN", label: "수분 보강", color: "#16a34a" },
+    { key: "BGN", label: "민감 케어", color: "#ea580c" },
+    { key: "EUD", label: "환경·UV 방어", color: "#7c3aed" },
   ];
 
   useEffect(() => {
@@ -58,6 +60,7 @@ export default function SkinAnalysisChart({
       if (currentStep >= steps) {
         clearInterval(interval);
         setAnimatedScores(scores);
+        console.log("🎯 최종 animatedScores:", scores);
       }
     }, stepDuration);
 
@@ -65,7 +68,7 @@ export default function SkinAnalysisChart({
   }, [scores, animate]);
 
   const createPolygonPoints = (scores: SkinAnalysisScore) => {
-    const center = 160;
+    const center = 180;
     const maxRadius = 120;
     const angleStep = (Math.PI * 2) / 6;
 
@@ -82,7 +85,7 @@ export default function SkinAnalysisChart({
   };
 
   const createGridLines = () => {
-    const center = 160;
+    const center = 180;
     const maxRadius = 120;
     const angleStep = (Math.PI * 2) / 6;
     const gridLevels = [20, 40, 60, 80, 100];
@@ -134,7 +137,7 @@ export default function SkinAnalysisChart({
   };
 
   const createLabels = () => {
-    const center = 160;
+    const center = 180;
     const labelRadius = 150;
     const angleStep = (Math.PI * 2) / 6;
 
@@ -142,6 +145,9 @@ export default function SkinAnalysisChart({
       const angle = index * angleStep - Math.PI / 2;
       const x = center + labelRadius * Math.cos(angle);
       const y = center + labelRadius * Math.sin(angle);
+      const scoreValue = Math.round(animatedScores[label.key as keyof SkinAnalysisScore]);
+
+      console.log(`📊 라벨 ${label.label} (${label.key}): 점수 ${scoreValue}, 위치 (${x.toFixed(1)}, ${y.toFixed(1)})`);
 
       return (
         <g key={`label-${index}`}>
@@ -161,10 +167,10 @@ export default function SkinAnalysisChart({
             textAnchor="middle"
             dominantBaseline="central"
             className="text-xs font-bold"
-            fill={label.color}
+            fill="#4a7c59"
             style={{ fontSize: "12px" }}
           >
-            {Math.round(animatedScores[label.key as keyof SkinAnalysisScore])}
+            {scoreValue}
           </text>
         </g>
       );
@@ -173,15 +179,11 @@ export default function SkinAnalysisChart({
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <h3 className="text-xl font-semibold text-center mb-4 text-gray-800">
-        피부 분석 결과
-      </h3>
-
       <div className="relative">
         <svg
-          width="320"
-          height="320"
-          viewBox="0 0 320 320"
+          width="360"
+          height="360"
+          viewBox="0 0 360 360"
           className="w-full h-auto"
         >
           {/* 배경 격자 */}
@@ -198,7 +200,7 @@ export default function SkinAnalysisChart({
 
           {/* 데이터 포인트 */}
           {labels.map((label, index) => {
-            const center = 160;
+            const center = 180;
             const maxRadius = 120;
             const angleStep = (Math.PI * 2) / 6;
             const angle = index * angleStep - Math.PI / 2;
@@ -213,7 +215,7 @@ export default function SkinAnalysisChart({
                 cx={x}
                 cy={y}
                 r="4"
-                fill={label.color}
+                fill="#4a7c59"
                 stroke="white"
                 strokeWidth="2"
                 className="drop-shadow-sm"
@@ -226,11 +228,6 @@ export default function SkinAnalysisChart({
         </svg>
       </div>
 
-      <div className="mt-4 text-center">
-        <p className="text-sm text-gray-600">
-          각 지표는 100점 만점으로 계산됩니다
-        </p>
-      </div>
     </div>
   );
 }

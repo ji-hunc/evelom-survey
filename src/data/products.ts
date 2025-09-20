@@ -4,7 +4,8 @@ export const products: Product[] = [
   {
     id: "cleansing-balm",
     name: "클렌징 밤",
-    description: "30초마다 한개씩 판매되는 오리지널 클렌징밤입니다.",
+    description:
+      "이브롬의 대표 제품으로 전 세계적으로 사랑받는 오리지널 클렌징 밤. 천연 오일 성분으로 깊숙한 클렌징과 동시에 피부 진정을 제공합니다.",
     image: "/images/클밤.jpg",
     benefits: [
       "건성 / 복합성 / 민감성",
@@ -45,7 +46,8 @@ export const products: Product[] = [
   {
     id: "gel-balm-cleanser",
     name: "젤 밤 클렌저",
-    description: "가벼운제형과 펌프 타입으로 편리하게 사용하는 젤 밤 클렌저",
+    description:
+      "편리한 펌프 타입의 젤 밤 클렌저로 가벼운 제형과 깊은 보습을 동시에. 남성 면도 젤로도 활용 가능한 멀티 유즈 제품입니다.",
     image: "/images/젤밤.jpg",
     benefits: [
       "건성 / 복합성 / 수분 부족형 지성",
@@ -83,7 +85,8 @@ export const products: Product[] = [
   {
     id: "foaming-cream-cleanser",
     name: "포밍 크림 클렌저",
-    description: "세안 후에도 촉촉함을 유지시켜주는 부드러운 데일리 클렌저",
+    description:
+      "모닝 클렌저나 2차 클렌저로 완벽한 포밍 크림 클렌저. 호박 효소 추출물이 피부결을 매끄럽게 정돈하며 세안 후에도 촉촉함이 지속됩니다.",
     image: "/images/클폼.jpg",
     benefits: ["지성 / 모든 피부 타입", "섬세한 클렌징", "피부결 개선 & 보습"],
     ingredients: ["호박발효추출물", "바바수오일", "알란토인", "글리세린"],
@@ -112,7 +115,8 @@ export const products: Product[] = [
   {
     id: "cleansing-oil",
     name: "클렌징 오일",
-    description: "강력한 세정력과 풍부한 영양감을 동시에 담은 오일 클렌저",
+    description:
+      "워터프루프 메이크업도 한번에 깔끔하게 제거하는 고농축 클렌징 오일. 스쿠알란과 바이오 지질 성분으로 피부 장벽을 강화하며 기름진 잔여물 없이 촉촉함만 남깁니다.",
     image: "/images/클오.jpg",
     benefits: [
       "건성 / 복합성 / 잦은 메이크업",
