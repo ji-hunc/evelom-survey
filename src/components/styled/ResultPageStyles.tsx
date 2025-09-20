@@ -92,8 +92,7 @@ export const RadarSection = styled(Section)`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: ${theme.spacing[6]} ${theme.spacing[8]} ${theme.spacing[8]}
-    ${theme.spacing[8]};
+  padding: ${theme.spacing[8]};
   position: relative;
 
   &::after {
@@ -224,9 +223,9 @@ export const ScrollText = styled.span`
 
 export const ProductSection = styled(Section)`
   background: ${theme.colors.surface.primary};
-  padding: ${theme.spacing[4]} ${theme.spacing[8]} ${theme.spacing[8]}
-    ${theme.spacing[8]};
-  justify-content: flex-start;
+  padding: ${theme.spacing[8]};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SectionTitle = styled.h1`
@@ -249,8 +248,7 @@ export const ProductContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${theme.spacing[12]};
-  flex: 1;
-  align-items: flex-start;
+  align-items: center;
   max-width: ${theme.layout.maxWidth};
   margin: 0 auto;
   width: 100%;
@@ -395,25 +393,24 @@ export const ReasonContent = styled.div`
 
 export const OtherSection = styled(Section)`
   background: ${theme.colors.surface.secondary};
-  justify-content: flex-start;
-  padding: ${theme.spacing[2]} ${theme.spacing[8]} ${theme.spacing[8]}
-    ${theme.spacing[8]};
+  justify-content: center;
+  align-items: center;
+  padding: ${theme.spacing[8]};
 `;
 
 export const OtherContent = styled.div`
-  max-width: 100%;
-  height: 100%;
+  max-width: ${theme.layout.maxWidth};
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 ${theme.spacing[6]};
+  justify-content: center;
+  margin: 0 auto;
 `;
 
 export const OtherHeader = styled.div`
   text-align: center;
   margin-bottom: ${theme.spacing[6]};
-  margin-top: ${theme.spacing[2]};
   background: ${theme.colors.surface.secondary};
-  padding: ${theme.spacing[2]} 0;
   z-index: 10;
 `;
 
@@ -435,8 +432,10 @@ export const OtherGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${theme.spacing[6]};
-  flex: 1;
-  align-content: start;
+  align-content: center;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 export const OtherCard = styled.div`
