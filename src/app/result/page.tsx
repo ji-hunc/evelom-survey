@@ -129,7 +129,6 @@ function ResultContent() {
 
         {/* Section B - Product Recommendation */}
         <S.ProductSection data-section="product">
-          <S.SectionTitle>추천 제품</S.SectionTitle>
           <S.ProductContent>
             {/* Product Card - Left Side */}
             <S.ProductCard>
@@ -156,6 +155,7 @@ function ResultContent() {
 
             {/* Product Details - Right Side */}
             <S.ProductDetails>
+              <S.SectionTitle>추천 제품</S.SectionTitle>
               <S.DetailsTitle>왜 이 제품인가요?</S.DetailsTitle>
 
               {recommendedProduct.reasons.map((reason, index) => (

@@ -234,13 +234,14 @@ export const SectionTitle = styled.h1`
   font-size: ${theme.typography.fontSize["4xl"]};
   font-weight: ${theme.typography.fontWeight.light};
   color: ${theme.colors.ink.primary};
-  text-align: center;
-  margin-bottom: ${theme.spacing[4]};
+  text-align: left;
+  margin-bottom: ${theme.spacing[6]};
   letter-spacing: -0.02em;
-  margin-top: ${theme.spacing[2]};
+  margin-top: 0;
 
   @media (max-width: ${theme.breakpoints.md}) {
     font-size: ${theme.typography.fontSize["4xl"]};
+    text-align: center;
   }
 `;
 
@@ -249,7 +250,7 @@ export const ProductContent = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: ${theme.spacing[12]};
   flex: 1;
-  align-items: center;
+  align-items: flex-start;
   max-width: ${theme.layout.maxWidth};
   margin: 0 auto;
   width: 100%;
@@ -271,7 +272,7 @@ export const ProductCard = styled.div`
 
 export const ProductImage = styled.img`
   width: 100%;
-  height: 300px;
+  height: 450px;
   object-fit: cover;
   margin: 0 0 ${theme.spacing[6]} 0;
   border-radius: ${theme.borderRadius.md} ${theme.borderRadius.md} 0 0;
@@ -326,6 +327,10 @@ export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing[6]};
+
+  ${SectionTitle} {
+    margin-bottom: ${theme.spacing[6]};
+  }
 `;
 
 export const DetailsTitle = styled.h2`
@@ -333,8 +338,8 @@ export const DetailsTitle = styled.h2`
   font-size: ${theme.typography.fontSize["3xl"]};
   font-weight: ${theme.typography.fontWeight.medium};
   color: ${theme.colors.ink.primary};
-  margin-bottom: ${theme.spacing[8]};
   letter-spacing: -0.02em;
+  margin-top: 30px;
 `;
 
 export const Reason = styled.div`
