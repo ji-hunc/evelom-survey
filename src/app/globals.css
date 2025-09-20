@@ -249,8 +249,9 @@ textarea {
 
 /* Photo-Dominant Home Layout */
 .premium-home {
-  width: var(--available-width);
-  height: var(--available-height);
+  width: 100vw;
+  height: calc(100vh - var(--app-bar-height));
+  height: calc(100dvh - var(--app-bar-height));
   display: grid;
   grid-template-columns: 3fr 2fr; /* 60/40 split */
   background: var(--surface-primary);
@@ -422,28 +423,28 @@ textarea {
 }
 
 .premium-quiz__option-input:checked + .premium-quiz__option-label {
-  background: var(--accent-gold);
-  border-color: var(--accent-gold);
-  color: var(--surface-primary);
+  background: var(--accent-gold) !important;
+  border-color: var(--accent-gold) !important;
+  color: var(--surface-primary) !important;
   transform: scale(1.02);
   box-shadow: 0 4px 16px rgba(201, 179, 126, 0.3);
 }
 
-.premium-quiz__option-label:hover {
-  background: var(--surface-tertiary);
-  border-color: var(--accent-gold-soft);
+@media (hover: hover) {
+  .premium-quiz__option-label:hover {
+    background: var(--surface-tertiary);
+    border-color: var(--accent-gold-soft);
+  }
 }
 
-.premium-quiz__option-input:checked + .premium-quiz__option-label:hover {
-  background: var(--accent-gold-soft);
-  border-color: var(--accent-gold-soft);
+@media (hover: hover) {
+  .premium-quiz__option-input:checked + .premium-quiz__option-label:hover {
+    background: var(--accent-gold-soft);
+    border-color: var(--accent-gold-soft);
+  }
 }
 
-/* Focus states for accessibility */
-.premium-quiz__option-input:focus + .premium-quiz__option-label {
-  outline: 3px solid #3b82f6;
-  outline-offset: 2px;
-}
+/* Focus states for accessibility - removed to prevent persistent selection */
 
 /* Quiz Action Bar - Fixed at Bottom */
 .premium-quiz__actions {

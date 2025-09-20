@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,6 +33,38 @@ export default function QuizPage() {
     (a) => a.questionId === currentQuestion.id
   )?.answer;
 
+  // 질문이 바뀔 때마다 모든 상태 초기화
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // 모든 라디오 버튼과 라벨의 상태 초기화
+      const allRadios = document.querySelectorAll('.premium-quiz__option-input');
+      const allLabels = document.querySelectorAll('.premium-quiz__option-label');
+
+      allRadios.forEach(radio => {
+        if (radio instanceof HTMLElement) {
+          radio.blur();
+        }
+      });
+
+      allLabels.forEach(label => {
+        if (label instanceof HTMLElement) {
+          label.blur();
+          // 인라인 스타일 제거하여 CSS로 다시 제어
+          label.style.removeProperty('background');
+          label.style.removeProperty('border-color');
+          label.style.removeProperty('transform');
+        }
+      });
+
+      // 현재 활성 요소의 focus 제거
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [currentQuestionIndex]);
+
   const handleAnswer = useCallback(
     (answer: string | number | boolean) => {
       setAnswers((prev) => {
@@ -41,6 +73,33 @@ export default function QuizPage() {
         );
         return [...filtered, { questionId: currentQuestion.id, answer }];
       });
+
+      // Focus 제거 및 모든 hover 상태 초기화
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
+      // 모든 라디오 버튼과 라벨의 상태 초기화
+      setTimeout(() => {
+        const allRadios = document.querySelectorAll('.premium-quiz__option-input');
+        const allLabels = document.querySelectorAll('.premium-quiz__option-label');
+
+        allRadios.forEach(radio => {
+          if (radio instanceof HTMLElement) {
+            radio.blur();
+          }
+        });
+
+        allLabels.forEach(label => {
+          if (label instanceof HTMLElement) {
+            label.blur();
+            // CSS 클래스를 강제로 재설정
+            label.style.background = '';
+            label.style.borderColor = '';
+            label.style.transform = '';
+          }
+        });
+      }, 100);
 
       // 답변 후 자동으로 다음 질문으로 이동
       setTimeout(() => {
@@ -58,19 +117,6 @@ export default function QuizPage() {
     [currentQuestion.id, isLastQuestion]
   );
 
-  const handleNext = useCallback(() => {
-    if (currentAnswer === undefined) return;
-
-    setIsTransitioning(true);
-    setTimeout(() => {
-      if (isLastQuestion) {
-        setShowDiagnosisInput(true);
-      } else {
-        setCurrentQuestionIndex((prev) => prev + 1);
-      }
-      setIsTransitioning(false);
-    }, 250);
-  }, [currentAnswer, isLastQuestion]);
 
   const handleBack = useCallback(() => {
     if (currentQuestionIndex > 0) {
@@ -115,12 +161,8 @@ export default function QuizPage() {
 
   if (showDiagnosisInput) {
     return (
-      <div className="premium-bg">
-        <div className="container-xl px-4 sm:px-6 lg:px-8 py-8">
-          <Link href="/" className="btn btn--quiet mb-8">
-            ← 홈으로 돌아가기
-          </Link>
-
+      <div className="premium-bg" style={{ paddingTop: '40px' }}>
+        <div className="container-xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="bg-white rounded-lg shadow-sm p-8">
             <h2 className="text-2xl sm:text-3xl font-light text-slate-900 mb-4 heading-serif">
               피부 진단 데이터{" "}
@@ -280,7 +322,7 @@ export default function QuizPage() {
                   >
                     <input
                       type="radio"
-                      name={String(currentQuestion.id)}
+                      name={`question-${currentQuestion.id}`}
                       value={String(option.value)}
                       checked={currentAnswer === option.value}
                       onChange={() => handleAnswer(option.value)}
@@ -300,7 +342,7 @@ export default function QuizPage() {
                 <label key={optionIndex} className="premium-quiz__option">
                   <input
                     type="radio"
-                    name={String(currentQuestion.id)}
+                    name={`question-${currentQuestion.id}`}
                     value={
                       currentQuestion.type === "scale" ? optionIndex : option
                     }
@@ -339,26 +381,6 @@ export default function QuizPage() {
             이전
           </button>
 
-          {isLastQuestion && (
-            <button
-              className="premium-quiz__next"
-              disabled={currentAnswer === undefined}
-              onClick={handleNext}
-            >
-              결과 확인
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
-                />
-              </svg>
-            </button>
-          )}
         </div>
       </main>
     </div>

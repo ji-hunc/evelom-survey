@@ -352,18 +352,6 @@ export default function CouponModal({
                         <span className="text-gray-600">할인율:</span>
                         <span className="font-bold text-[#4a7c59]">10%</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">사용 상태:</span>
-                        <span
-                          className={`font-medium ${
-                            currentCustomer.is_used
-                              ? "text-red-600"
-                              : "text-green-600"
-                          }`}
-                        >
-                          {currentCustomer.is_used ? "사용됨" : "미사용"}
-                        </span>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -389,13 +377,6 @@ export default function CouponModal({
                         : "🏪 직원 확인 - 쿠폰 사용 처리"}
                     </button>
                   )}
-
-                  <button
-                    onClick={handleGoToShopping}
-                    className="w-full bg-[#4a7c59] text-white py-3 px-4 rounded-lg hover:bg-[#3d6549] transition-colors font-medium"
-                  >
-                    제품 구매하러 가기
-                  </button>
 
                   <button
                     onClick={handleClose}

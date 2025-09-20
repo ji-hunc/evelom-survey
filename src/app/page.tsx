@@ -8,12 +8,13 @@ export default function Home() {
     <div
       style={{
         width: "100vw",
-        height: "100vh",
+        height: "100dvh",
         background: "var(--surface-primary)",
-        paddingTop: "var(--top-safe)",
-        paddingBottom: "var(--bottom-safe)",
-        paddingLeft: "var(--left-safe)",
-        paddingRight: "var(--right-safe)",
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+        paddingLeft: "env(safe-area-inset-left)",
+        paddingRight: "env(safe-area-inset-right)",
+        overflow: "hidden",
       }}
     >
       {/* Premium App Bar */}
