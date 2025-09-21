@@ -48,8 +48,8 @@ export const theme = {
   },
   typography: {
     fontFamily: {
-      heading: "'Cormorant Garamond', serif",
-      body: "'Inter', sans-serif",
+      heading: "'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+      body: "'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
     },
     fontSize: {
       xs: '12px',

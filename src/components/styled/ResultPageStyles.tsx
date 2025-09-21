@@ -446,16 +446,18 @@ export const OtherGrid = styled.div`
 
 export const OtherCard = styled.div`
   background: ${theme.colors.surface.primary};
-  border-radius: ${theme.borderRadius.lg};
+  border-radius: ${theme.borderRadius.xl};
   padding: 0;
-  text-align: center;
-  box-shadow: ${theme.shadows.md};
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   transition: all ${theme.transitions.quick};
   overflow: hidden;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: ${theme.shadows.lg};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+    border-color: rgba(201, 179, 126, 0.1);
   }
 `;
 
@@ -469,36 +471,45 @@ export const OtherImage = styled.img`
 
 export const OtherName = styled.h3`
   font-family: ${theme.typography.fontFamily.heading};
-  font-size: ${theme.typography.fontSize.lg};
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-size: ${theme.typography.fontSize.xl};
+  font-weight: ${theme.typography.fontWeight.semibold};
   color: ${theme.colors.ink.primary};
-  margin-bottom: ${theme.spacing[3]};
-  padding: 0 ${theme.spacing[4]};
+  margin-bottom: ${theme.spacing[4]};
+  padding: 0 ${theme.spacing[6]};
+  text-align: center;
+  letter-spacing: -0.02em;
 `;
 
 export const OtherBenefits = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing[2]};
-  margin-bottom: ${theme.spacing[4]};
-  padding: 0 ${theme.spacing[4]} ${theme.spacing[4]} ${theme.spacing[4]};
+  gap: ${theme.spacing[3]};
+  margin-bottom: ${theme.spacing[6]};
+  padding: 0 ${theme.spacing[6]} ${theme.spacing[6]} ${theme.spacing[6]};
+  text-align: left;
 `;
 
 export const OtherBenefit = styled.div`
-  background: rgba(201, 179, 126, 0.08);
-  padding: ${theme.spacing[3]} ${theme.spacing[4]};
-  border-radius: ${theme.borderRadius.md};
-  border: 1px solid rgba(201, 179, 126, 0.2);
-  font-size: ${theme.typography.fontSize.sm};
+  font-size: ${theme.typography.fontSize.base};
   color: ${theme.colors.ink.secondary};
   font-family: ${theme.typography.fontFamily.body};
-  transition: all ${theme.transitions.quick};
-  box-shadow: 0 1px 4px rgba(201, 179, 126, 0.1);
+  line-height: ${theme.typography.lineHeight.relaxed};
+  font-weight: ${theme.typography.fontWeight.normal};
+  position: relative;
+  padding-left: ${theme.spacing[4]};
+  margin-bottom: 0;
 
-  &:hover {
-    background: rgba(201, 179, 126, 0.12);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(201, 179, 126, 0.15);
+  &::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: ${theme.colors.secondary};
+    font-weight: ${theme.typography.fontWeight.medium};
+    font-size: ${theme.typography.fontSize.lg};
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 

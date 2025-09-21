@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap");
 
 /* ===== PREMIUM LIGHT KIOSK DESIGN SYSTEM ===== */
 
@@ -195,7 +192,7 @@ textarea {
 }
 
 .premium-app-bar__logo {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-subsection);
   font-weight: 300;
   color: var(--ink-primary);
@@ -282,7 +279,7 @@ textarea {
 }
 
 .premium-home__title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-hero);
   font-weight: 300;
   color: var(--ink-primary);
@@ -376,7 +373,7 @@ textarea {
 /* Consistent Panel Styling - No overlay variations */
 
 .premium-quiz__question {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-section);
   font-weight: 300;
   color: var(--ink-primary);
@@ -419,7 +416,7 @@ textarea {
   transition: all var(--transition-quick);
   cursor: pointer;
   line-height: 1.3;
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-quiz__option-input:checked + .premium-quiz__option-label {
@@ -577,7 +574,7 @@ textarea {
 }
 
 .premium-results__radar-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-hero);
   font-weight: 300;
   color: var(--ink-primary);
@@ -594,7 +591,7 @@ textarea {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   position: relative;
   z-index: 10;
 }
@@ -702,7 +699,7 @@ textarea {
 .premium-results__scroll-text {
   font-size: var(--text-caption);
   font-weight: 500;
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 @keyframes gentle-bounce-light {
@@ -730,7 +727,7 @@ textarea {
 }
 
 .premium-results__section-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-hero);
   font-weight: 300;
   color: var(--ink-primary);
@@ -770,7 +767,7 @@ textarea {
   font-size: var(--text-small);
   font-weight: 500;
   margin-bottom: var(--space-6);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-results__product-image {
@@ -784,7 +781,7 @@ textarea {
 }
 
 .premium-results__product-name {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-section);
   font-weight: 300;
   color: var(--ink-primary);
@@ -797,7 +794,7 @@ textarea {
   color: var(--ink-secondary);
   line-height: 1.5;
   margin-bottom: var(--space-8);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-results__product-cta {
@@ -831,7 +828,7 @@ textarea {
 }
 
 .premium-results__details-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-section);
   font-weight: 300;
   color: var(--ink-primary);
@@ -869,14 +866,14 @@ textarea {
   font-weight: 500;
   color: var(--ink-primary);
   margin-bottom: var(--space-1);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-results__reason-content p {
   font-size: var(--text-body);
   color: var(--ink-secondary);
   line-height: 1.4;
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 /* Section C - Other Cleansers */
@@ -907,7 +904,7 @@ textarea {
 }
 
 .premium-results__other-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--text-section);
   font-weight: 300;
   color: var(--ink-primary);
@@ -917,7 +914,7 @@ textarea {
 .premium-results__other-subtitle {
   font-size: var(--text-body);
   color: var(--ink-secondary);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-results__other-grid {
@@ -966,7 +963,7 @@ textarea {
   font-weight: 500;
   color: var(--ink-primary);
   margin-bottom: var(--space-4);
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-weight: 300;
   line-height: 1.2;
 }
@@ -983,7 +980,7 @@ textarea {
   font-size: var(--text-body);
   color: var(--ink-secondary);
   margin-bottom: var(--space-3);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   line-height: 1.4;
 }
 
@@ -1004,7 +1001,7 @@ textarea {
   cursor: pointer;
   transition: all var(--transition-quick);
   min-height: var(--min-touch-target);
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .premium-results__other-cta:hover {
@@ -2001,10 +1998,9 @@ input[type="radio"] + label {
   --color-warning: #f59e0b;
 
   /* Typography */
-  --font-heading-en: "Cormorant Garamond", "Times New Roman", serif;
-  --font-body-en: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  --font-kr: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading-en: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body-en: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-kr: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
   /* Type Scale */
   --text-xs: 0.75rem; /* 12px */
